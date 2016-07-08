@@ -21,11 +21,11 @@
 
 namespace OCA\Files_External\Lib\Auth\PublicKey;
 
-use \OCP\IL10N;
-use \OCA\Files_External\Lib\DefinitionParameter;
-use \OCA\Files_External\Lib\Auth\AuthMechanism;
+use OCP\IL10N;
+use OCP\Files\External\Auth\AuthMechanism;
+use OCP\Files\External\DefinitionParameter;
 use OCP\Files\External\IStorageConfig;
-use \OCP\IConfig;
+use OCP\IConfig;
 use OCP\IUser;
 use \phpseclib\Crypt\RSA as RSACrypt;
 

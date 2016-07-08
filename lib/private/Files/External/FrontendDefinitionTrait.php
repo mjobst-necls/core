@@ -22,7 +22,7 @@
 
 namespace OC\Files\External;
 
-use \OCA\Files_External\Lib\DefinitionParameter;
+use OCP\Files\External\DefinitionParameter;
 use OCP\Files\External\IStorageConfig;
 
 /**

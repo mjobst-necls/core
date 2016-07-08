@@ -22,9 +22,9 @@
 namespace OCA\Files_External\Command;
 
 use OC\Core\Command\Base;
-use OCA\Files_External\Lib\Auth\AuthMechanism;
-use OCA\Files_External\Lib\Backend\Backend;
-use OCA\Files_External\Lib\DefinitionParameter;
+use OCP\Files\External\Auth\AuthMechanism;
+use OCP\Files\External\Backend\Backend;
+use OCP\Files\External\DefinitionParameter;
 use OCA\Files_External\Service\BackendService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;

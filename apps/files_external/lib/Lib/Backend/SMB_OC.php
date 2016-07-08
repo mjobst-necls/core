@@ -21,15 +21,15 @@
 
 namespace OCA\Files_External\Lib\Backend;
 
-use \OCP\IL10N;
-use \OCA\Files_External\Lib\Backend\Backend;
-use \OCA\Files_External\Lib\DefinitionParameter;
-use \OCA\Files_External\Lib\Auth\AuthMechanism;
-use \OCA\Files_External\Service\BackendService;
-use \OCA\Files_External\Lib\Auth\Password\SessionCredentials;
+use OCP\IL10N;
+use OCP\Files\External\DefinitionParameter;
+use OCP\Files\External\Auth\AuthMechanism;
+use OCP\Files\External\Backend\Backend;
+use OCA\Files_External\Service\BackendService;
+use OCA\Files_External\Lib\Auth\Password\SessionCredentials;
 use OCP\Files\External\IStorageConfig;
-use \OCA\Files_External\Lib\LegacyDependencyCheckPolyfill;
-use \OCA\Files_External\Lib\Backend\SMB;
+use OCA\Files_External\Lib\LegacyDependencyCheckPolyfill;
+use OCA\Files_External\Lib\Backend\SMB;
 use OCP\IUser;
 
 /**

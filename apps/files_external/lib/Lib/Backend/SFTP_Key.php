@@ -21,13 +21,13 @@
 
 namespace OCA\Files_External\Lib\Backend;
 
-use \OCP\IL10N;
-use \OCA\Files_External\Lib\Backend\Backend;
-use \OCA\Files_External\Lib\DefinitionParameter;
-use \OCA\Files_External\Lib\Auth\AuthMechanism;
-use \OCA\Files_External\Service\BackendService;
-use \OCA\Files_External\Lib\Auth\PublicKey\RSA;
-use \OCA\Files_External\Lib\Backend\SFTP;
+use OCP\IL10N;
+use OCP\Files\External\DefinitionParameter;
+use OCP\Files\External\Auth\AuthMechanism;
+use OCP\Files\External\Backend\Backend;
+use OCA\Files_External\Service\BackendService;
+use OCA\Files_External\Lib\Auth\PublicKey\RSA;
+use OCA\Files_External\Lib\Backend\SFTP;
 
 class SFTP_Key extends Backend {
 

@@ -216,7 +216,7 @@ class StorageConfig implements IStorageConfig {
 			foreach($backendOptions as $key => $value) {
 				if(isset($parameters[$key])) {
 					switch ($parameters[$key]->getType()) {
-						case \OCA\Files_External\Lib\DefinitionParameter::VALUE_BOOLEAN:
+						case \OCP\Files\External\DefinitionParameter::VALUE_BOOLEAN:
 							$value = (bool)$value;
 							break;
 					}

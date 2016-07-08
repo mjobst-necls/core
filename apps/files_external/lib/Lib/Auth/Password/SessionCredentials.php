@@ -22,16 +22,16 @@
 
 namespace OCA\Files_External\Lib\Auth\Password;
 
-use \OCP\IUser;
-use \OCP\IL10N;
-use \OCA\Files_External\Lib\DefinitionParameter;
-use \OCP\Files\External\Auth\AuthMechanism;
+use OCP\IUser;
+use OCP\IL10N;
+use OCP\Files\External\Auth\AuthMechanism;
+use OCP\Files\External\DefinitionParameter;
 use OCP\Files\External\IStorageConfig;
-use \OCP\ISession;
-use \OCP\Security\ICrypto;
-use \OCP\Files\Storage;
-use \OCA\Files_External\Lib\SessionStorageWrapper;
-use \OCA\Files_External\Lib\InsufficientDataForMeaningfulAnswerException;
+use OCP\ISession;
+use OCP\Security\ICrypto;
+use OCP\Files\Storage;
+use OCA\Files_External\Lib\SessionStorageWrapper;
+use OCA\Files_External\Lib\InsufficientDataForMeaningfulAnswerException;
 
 /**
  * Username and password from login credentials, saved in session

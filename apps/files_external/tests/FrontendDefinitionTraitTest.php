@@ -25,12 +25,12 @@ namespace OCA\Files_External\Tests;
 class FrontendDefinitionTraitTest extends \Test\TestCase {
 
 	public function testJsonSerialization() {
-		$param = $this->getMockBuilder('\OCA\Files_External\Lib\DefinitionParameter')
+		$param = $this->getMockBuilder('\OCP\Files\External\DefinitionParameter')
 			->disableOriginalConstructor()
 			->getMock();
 		$param->method('getName')->willReturn('foo');
 
-		$trait = $this->getMockForTrait('\OCA\Files_External\Lib\FrontendDefinitionTrait');
+		$trait = $this->getMockForTrait('\OCP\Files\External\FrontendDefinitionTrait');
 		$trait->setText('test');
 		$trait->addParameters([$param]);
 		$trait->addCustomJs('foo/bar.js');
@@ -59,7 +59,7 @@ class FrontendDefinitionTraitTest extends \Test\TestCase {
 	public function testValidateStorage($expectedSuccess, $params) {
 		$backendParams = [];
 		foreach ($params as $name => $valid) {
-			$param = $this->getMockBuilder('\OCA\Files_External\Lib\DefinitionParameter')
+			$param = $this->getMockBuilder('\OCP\Files\External\DefinitionParameter')
 				->disableOriginalConstructor()
 				->getMock();
 			$param->method('getName')
@@ -81,7 +81,7 @@ class FrontendDefinitionTraitTest extends \Test\TestCase {
 		$storageConfig->expects($this->any())
 			->method('setBackendOption');
 
-		$trait = $this->getMockForTrait('\OCA\Files_External\Lib\FrontendDefinitionTrait');
+		$trait = $this->getMockForTrait('\OCP\Files\External\FrontendDefinitionTrait');
 		$trait->setText('test');
 		$trait->addParameters($backendParams);
 
@@ -89,7 +89,7 @@ class FrontendDefinitionTraitTest extends \Test\TestCase {
 	}
 
 	public function testValidateStorageSet() {
-		$param = $this->getMockBuilder('\OCA\Files_External\Lib\DefinitionParameter')
+		$param = $this->getMockBuilder('\OCP\Files\External\DefinitionParameter')
 			->disableOriginalConstructor()
 			->getMock();
 		$param->method('getName')
@@ -112,7 +112,7 @@ class FrontendDefinitionTraitTest extends \Test\TestCase {
 			->method('setBackendOption')
 			->with('param', 'foobar');
 
-		$trait = $this->getMockForTrait('\OCA\Files_External\Lib\FrontendDefinitionTrait');
+		$trait = $this->getMockForTrait('\OCP\Files\External\FrontendDefinitionTrait');
 		$trait->setText('test');
 		$trait->addParameter($param);
 

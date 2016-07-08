@@ -21,9 +21,9 @@
 
 namespace OCA\Files_External\Lib\Auth\Password;
 
-use \OCP\IL10N;
-use \OCA\Files_External\Lib\DefinitionParameter;
-use \OCP\Files\External\Auth\AuthMechanism;
+use OCP\IL10N;
+use OCP\Files\External\Auth\AuthMechanism;
+use OCP\Files\External\DefinitionParameter;
 
 /**
  * Basic password authentication mechanism
