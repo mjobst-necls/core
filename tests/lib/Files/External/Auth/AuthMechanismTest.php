@@ -19,7 +19,7 @@
  *
  */
 
-namespace OCA\Files_External\Tests\Auth;
+namespace Test\Files\External\Auth;
 
 class AuthMechanismTest extends \Test\TestCase {
 

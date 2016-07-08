@@ -20,7 +20,7 @@
  *
  */
 
-namespace OCA\Files_External\Tests;
+namespace Test\Files\External;
 
 class FrontendDefinitionTraitTest extends \Test\TestCase {
 

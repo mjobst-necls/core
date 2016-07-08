@@ -19,7 +19,7 @@
  *
  */
 
-namespace OCA\Files_External\Tests\Backend;
+namespace Test\Files\External\Backend;
 
 use \OCA\Files_External\Lib\Backend\Backend;
 

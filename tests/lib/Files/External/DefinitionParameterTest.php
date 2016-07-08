@@ -20,7 +20,7 @@
  *
  */
 
-namespace OCA\Files_External\Tests;
+namespace Test\Files\External;
 
 use \OCP\Files\External\DefinitionParameter as Param;
 
