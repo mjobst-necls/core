@@ -30,7 +30,7 @@ class FrontendDefinitionTraitTest extends \Test\TestCase {
 			->getMock();
 		$param->method('getName')->willReturn('foo');
 
-		$trait = $this->getMockForTrait('\OCP\Files\External\FrontendDefinitionTrait');
+		$trait = $this->getMockForTrait('\OC\Files\External\FrontendDefinitionTrait');
 		$trait->setText('test');
 		$trait->addParameters([$param]);
 		$trait->addCustomJs('foo/bar.js');
@@ -81,7 +81,7 @@ class FrontendDefinitionTraitTest extends \Test\TestCase {
 		$storageConfig->expects($this->any())
 			->method('setBackendOption');
 
-		$trait = $this->getMockForTrait('\OCP\Files\External\FrontendDefinitionTrait');
+		$trait = $this->getMockForTrait('\OC\Files\External\FrontendDefinitionTrait');
 		$trait->setText('test');
 		$trait->addParameters($backendParams);
 
@@ -112,7 +112,7 @@ class FrontendDefinitionTraitTest extends \Test\TestCase {
 			->method('setBackendOption')
 			->with('param', 'foobar');
 
-		$trait = $this->getMockForTrait('\OCP\Files\External\FrontendDefinitionTrait');
+		$trait = $this->getMockForTrait('\OC\Files\External\FrontendDefinitionTrait');
 		$trait->setText('test');
 		$trait->addParameter($param);
 

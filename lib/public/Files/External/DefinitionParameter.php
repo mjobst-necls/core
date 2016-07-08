@@ -55,6 +55,7 @@ class DefinitionParameter implements \JsonSerializable {
 	/**
 	 * @param string $name
 	 * @param string $text
+ 	 * @since 9.2.0
 	 */
 	public function __construct($name, $text) {
 		$this->name = $name;

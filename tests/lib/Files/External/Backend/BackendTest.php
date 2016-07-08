@@ -21,12 +21,12 @@
 
 namespace Test\Files\External\Backend;
 
-use \OCA\Files_External\Lib\Backend\Backend;
+use \OCP\Files\External\Backend\Backend;
 
 class BackendTest extends \Test\TestCase {
 
 	public function testJsonSerialization() {
-		$backend = $this->getMockBuilder('\OCA\Files_External\Lib\Backend\Backend')
+		$backend = $this->getMockBuilder('\OCP\Files\External\Backend\Backend')
 			->setMethods(['jsonSerializeDefinition'])
 			->getMock();
 		$backend->expects($this->once())
@@ -58,7 +58,7 @@ class BackendTest extends \Test\TestCase {
 	 * @dataProvider validateStorageProvider
 	 */
 	public function testValidateStorage($expectedSuccess, $definitionSuccess) {
-		$backend = $this->getMockBuilder('\OCA\Files_External\Lib\Backend\Backend')
+		$backend = $this->getMockBuilder('\OCP\Files\External\Backend\Backend')
 			->setMethods(['validateStorageDefinition'])
 			->getMock();
 		$backend->expects($this->atMost(1))
