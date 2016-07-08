@@ -19,7 +19,7 @@
  *
  */
 
-namespace OCA\Files_External\Lib;
+namespace OC\Files\External;
 
 /**
  * External storage backend dependency
