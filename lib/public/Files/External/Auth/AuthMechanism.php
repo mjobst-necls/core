@@ -75,6 +75,7 @@ class AuthMechanism implements \JsonSerializable {
 	 * See self::SCHEME_* constants
 	 *
 	 * @return string
+ 	 * @since 9.2.0
 	 */
 	public function getScheme() {
 		return $this->scheme;
@@ -83,6 +84,7 @@ class AuthMechanism implements \JsonSerializable {
 	/**
 	 * @param string $scheme
 	 * @return self
+ 	 * @since 9.2.0
 	 */
 	public function setScheme($scheme) {
 		$this->scheme = $scheme;
@@ -93,6 +95,7 @@ class AuthMechanism implements \JsonSerializable {
 	 * Serialize into JSON for client-side JS
 	 *
 	 * @return array
+ 	 * @since 9.2.0
 	 */
 	public function jsonSerialize() {
 		$data = $this->jsonSerializeDefinition();
@@ -109,6 +112,7 @@ class AuthMechanism implements \JsonSerializable {
 	 *
 	 * @param IStorageConfig $storage
 	 * @return bool
+ 	 * @since 9.2.0
 	 */
 	public function validateStorage(IStorageConfig $storage) {
 		// does the backend actually support this scheme

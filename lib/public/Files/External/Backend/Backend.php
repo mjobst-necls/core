@@ -77,6 +77,7 @@ class Backend implements \JsonSerializable {
 
 	/**
 	 * @return string
+ 	 * @since 9.2.0
 	 */
 	public function getStorageClass() {
 		return $this->storageClass;
@@ -85,6 +86,7 @@ class Backend implements \JsonSerializable {
 	/**
 	 * @param string $class
 	 * @return self
+ 	 * @since 9.2.0
 	 */
 	public function setStorageClass($class) {
 		$this->storageClass = $class;
@@ -93,6 +95,7 @@ class Backend implements \JsonSerializable {
 
 	/**
 	 * @return array
+ 	 * @since 9.2.0
 	 */
 	public function getAuthSchemes() {
 		if (empty($this->authSchemes)) {
@@ -104,6 +107,7 @@ class Backend implements \JsonSerializable {
 	/**
 	 * @param string $scheme
 	 * @return self
+ 	 * @since 9.2.0
 	 */
 	public function addAuthScheme($scheme) {
 		$this->authSchemes[$scheme] = true;
@@ -113,6 +117,7 @@ class Backend implements \JsonSerializable {
 	/**
 	 * @param array $parameters storage parameters, for dynamic mechanism selection
 	 * @return AuthMechanism
+ 	 * @since 9.2.0
 	 */
 	public function getLegacyAuthMechanism(array $parameters = []) {
 		if (is_callable($this->legacyAuthMechanism)) {
@@ -124,6 +129,7 @@ class Backend implements \JsonSerializable {
 	/**
 	 * @param AuthMechanism $authMechanism
 	 * @return self
+ 	 * @since 9.2.0
 	 */
 	public function setLegacyAuthMechanism(AuthMechanism $authMechanism) {
 		$this->legacyAuthMechanism = $authMechanism;
@@ -133,6 +139,7 @@ class Backend implements \JsonSerializable {
 	/**
 	 * @param callable $callback dynamic auth mechanism selection
 	 * @return self
+ 	 * @since 9.2.0
 	 */
 	public function setLegacyAuthMechanismCallback(callable $callback) {
 		$this->legacyAuthMechanism = $callback;
@@ -142,6 +149,7 @@ class Backend implements \JsonSerializable {
 	 * Serialize into JSON for client-side JS
 	 *
 	 * @return array
+ 	 * @since 9.2.0
 	 */
 	public function jsonSerialize() {
 		$data = $this->jsonSerializeDefinition();
@@ -159,6 +167,7 @@ class Backend implements \JsonSerializable {
 	 *
 	 * @param IStorageConfig $storage
 	 * @return bool
+ 	 * @since 9.2.0
 	 */
 	public function validateStorage(IStorageConfig $storage) {
 		return $this->validateStorageDefinition($storage);
