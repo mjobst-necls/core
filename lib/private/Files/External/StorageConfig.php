@@ -27,9 +27,9 @@
 namespace OC\Files\External;
 
 use OCP\Files\External\IStorageConfig;
-use OCA\Files_External\Lib\Auth\IUserProvided;
-use \OCP\Files\External\Backend\Backend;
-use \OCP\Files\External\Auth\AuthMechanism;
+use OCP\Files\External\Auth\IUserProvided;
+use OCP\Files\External\Auth\AuthMechanism;
+use OCP\Files\External\Backend\Backend;
 
 /**
  * External storage configuration

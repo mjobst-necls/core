@@ -25,7 +25,7 @@
 namespace OCA\Files_External\Controller;
 
 use OCA\Files_External\Lib\Auth\AuthMechanism;
-use OCA\Files_External\Lib\Auth\IUserProvided;
+use OCP\Files\External\Auth\IUserProvided;
 use OCA\Files_External\Lib\InsufficientDataForMeaningfulAnswerException;
 use OCP\ILogger;
 use \OCP\IRequest;
