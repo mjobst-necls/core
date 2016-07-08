@@ -21,7 +21,7 @@
 
 namespace OC\Files\External;
 
-use \OCA\Files_External\Service\BackendService;
+use OCP\Files\External\IStoragesBackendService;
 
 /**
  * Trait to implement priority mechanics for a configuration class
@@ -29,7 +29,7 @@ use \OCA\Files_External\Service\BackendService;
 trait PriorityTrait {
 
 	/** @var int initial priority */
-	protected $priority = BackendService::PRIORITY_DEFAULT;
+	protected $priority = IStoragesBackendService::PRIORITY_DEFAULT;
 
 	/**
 	 * @return int

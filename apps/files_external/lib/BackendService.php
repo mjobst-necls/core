@@ -1,9 +1,9 @@
 <?php
 /**
- * @author Joas Schilling <coding@schilljs.com>
- * @author Robin Appelman <icewind@owncloud.com>
+ * @author Morris Jobke <hey@morrisjobke.de>
+ * @author Robin McCorkell <robin@mccorkell.me.uk>
  *
- * @copyright Copyright (c) 2016, ownCloud GmbH.
+ * @copyright Copyright (c) 2016, ownCloud, Inc.
  * @license AGPL-3.0
  *
  * This code is free software: you can redistribute it and/or modify
@@ -22,28 +22,10 @@
 
 namespace OCA\Files_External\Service;
 
-use OCP\Files\External\IStoragesBackendService;
-
-class ImportLegacyStoragesService extends LegacyStoragesService {
-	private $data;
-
-	/**
-	 * @param IStoragesBackendService $backendService
-	 */
-	public function __construct(IStoragesBackendService $backendService) {
-		$this->backendService = $backendService;
-	}
-
-	public function setData($data) {
-		$this->data = $data;
-	}
-
-	/**
-	 * Read legacy config data
-	 *
-	 * @return array list of mount configs
-	 */
-	protected function readLegacyConfig() {
-		return $this->data;
-	}
+/**
+ * Service class to manage backend definitions
+ *
+ * @deprecated use \OC::$server->getStoragesBackendService() instead
+ */
+class BackendService extends \OC\Files\External\StoragesBackendService {
 }

@@ -18,30 +18,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
-namespace OCA\Files_External\Tests\Service;
+namespace Test\Files\External;
 
-use \OCA\Files_External\Service\BackendService;
+use OCP\Files\External\IStoragesBackendService;
+use OC\Files\External\StoragesBackendService;
 
-class BackendServiceTest extends \Test\TestCase {
+class StoragesBackendServiceTest extends \Test\TestCase {
 
 	/** @var \OCP\IConfig */
 	protected $config;
 
-	/** @var \OCP\IL10N */
-	protected $l10n;
-
 	protected function setUp() {
 		$this->config = $this->createMock('\OCP\IConfig');
-		$this->l10n = $this->createMock('\OCP\IL10N');
 	}
 
 	/**
 	 * @param string $class
 	 *
-	 * @return \OCA\Files_External\Lib\Backend\Backend
+	 * @return \OCP\Files\External\Backend\Backend
 	 */
 	protected function getBackendMock($class) {
-		$backend = $this->getMockBuilder('\OCA\Files_External\Lib\Backend\Backend')
+		$backend = $this->getMockBuilder('\OCP\Files\External\Backend\Backend')
 			->disableOriginalConstructor()
 			->getMock();
 		$backend->method('getIdentifier')->will($this->returnValue('identifier:'.$class));
@@ -52,10 +49,10 @@ class BackendServiceTest extends \Test\TestCase {
 	/**
 	 * @param string $class
 	 *
-	 * @return \OCA\Files_External\Lib\Auth\AuthMechanism
+	 * @return \OCP\Files\External\Auth\AuthMechanism
 	 */
 	protected function getAuthMechanismMock($class) {
-		$backend = $this->getMockBuilder('\OCA\Files_External\Lib\Auth\AuthMechanism')
+		$backend = $this->getMockBuilder('\OCP\Files\External\Auth\AuthMechanism')
 			->disableOriginalConstructor()
 			->getMock();
 		$backend->method('getIdentifier')->will($this->returnValue('identifier:'.$class));
@@ -64,11 +61,11 @@ class BackendServiceTest extends \Test\TestCase {
 	}
 
 	public function testRegisterBackend() {
-		$service = new BackendService($this->config, $this->l10n);
+		$service = new StoragesBackendService($this->config);
 
 		$backend = $this->getBackendMock('\Foo\Bar');
 
-		$backendAlias = $this->getMockBuilder('\OCA\Files_External\Lib\Backend\Backend')
+		$backendAlias = $this->getMockBuilder('\OCP\Files\External\Backend\Backend')
 			->disableOriginalConstructor()
 			->getMock();
 		$backendAlias->method('getIdentifierAliases')
@@ -91,7 +88,7 @@ class BackendServiceTest extends \Test\TestCase {
 	}
 
 	public function testBackendProvider() {
-		$service = new BackendService($this->config, $this->l10n);
+		$service = new StoragesBackendService($this->config);
 
 		$backend1 = $this->getBackendMock('\Foo\Bar');
 		$backend2 = $this->getBackendMock('\Bar\Foo');
@@ -109,7 +106,7 @@ class BackendServiceTest extends \Test\TestCase {
 	}
 
 	public function testAuthMechanismProvider() {
-		$service = new BackendService($this->config, $this->l10n);
+		$service = new StoragesBackendService($this->config);
 
 		$backend1 = $this->getAuthMechanismMock('\Foo\Bar');
 		$backend2 = $this->getAuthMechanismMock('\Bar\Foo');
@@ -127,7 +124,7 @@ class BackendServiceTest extends \Test\TestCase {
 	}
 
 	public function testMultipleBackendProviders() {
-		$service = new BackendService($this->config, $this->l10n);
+		$service = new StoragesBackendService($this->config);
 
 		$backend1a = $this->getBackendMock('\Foo\Bar');
 		$backend1b = $this->getBackendMock('\Bar\Foo');
@@ -160,7 +157,7 @@ class BackendServiceTest extends \Test\TestCase {
 				['files_external', 'user_mounting_backends', '', 'identifier:\User\Mount\Allowed,identifier_alias']
 			]));
 
-		$service = new BackendService($this->config, $this->l10n);
+		$service = new StoragesBackendService($this->config);
 
 		$backendAllowed = $this->getBackendMock('\User\Mount\Allowed');
 		$backendAllowed->expects($this->never())
@@ -168,9 +165,9 @@ class BackendServiceTest extends \Test\TestCase {
 		$backendNotAllowed = $this->getBackendMock('\User\Mount\NotAllowed');
 		$backendNotAllowed->expects($this->once())
 			->method('removeVisibility')
-			->with(BackendService::VISIBILITY_PERSONAL);
+			->with(IStoragesBackendService::VISIBILITY_PERSONAL);
 
-		$backendAlias = $this->getMockBuilder('\OCA\Files_External\Lib\Backend\Backend')
+		$backendAlias = $this->getMockBuilder('\OCP\Files\External\Backend\Backend')
 			->disableOriginalConstructor()
 			->getMock();
 		$backendAlias->method('getIdentifierAliases')
@@ -184,7 +181,7 @@ class BackendServiceTest extends \Test\TestCase {
 	}
 
 	public function testGetAvailableBackends() {
-		$service = new BackendService($this->config, $this->l10n);
+		$service = new StoragesBackendService($this->config);
 
 		$backendAvailable = $this->getBackendMock('\Backend\Available');
 		$backendAvailable->expects($this->once())
@@ -194,7 +191,7 @@ class BackendServiceTest extends \Test\TestCase {
 		$backendNotAvailable->expects($this->once())
 			->method('checkDependencies')
 			->will($this->returnValue([
-				$this->getMockBuilder('\OCA\Files_External\Lib\MissingDependency')
+				$this->getMockBuilder('\OC\Files\External\MissingDependency')
 					->disableOriginalConstructor()
 					->getMock()
 			]));

@@ -21,7 +21,7 @@
 
 namespace OC\Files\External;
 
-use \OCA\Files_External\Service\BackendService;
+use OCP\Files\External\IStoragesBackendService;
 
 /**
  * Trait to implement visibility mechanics for a configuration class
@@ -36,10 +36,10 @@ use \OCA\Files_External\Service\BackendService;
 trait VisibilityTrait {
 
 	/** @var int visibility */
-	protected $visibility = BackendService::VISIBILITY_DEFAULT;
+	protected $visibility = IStoragesBackendService::VISIBILITY_DEFAULT;
 
 	/** @var int allowed visibilities */
-	protected $allowedVisibility = BackendService::VISIBILITY_DEFAULT;
+	protected $allowedVisibility = IStoragesBackendService::VISIBILITY_DEFAULT;
 
 	/**
 	 * @return int

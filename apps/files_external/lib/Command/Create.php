@@ -29,7 +29,7 @@ use OCP\Files\External\Auth\AuthMechanism;
 use OCP\Files\External\Backend\Backend;
 use OCP\Files\External\DefinitionParameter;
 use OCP\Files\External\IStorageConfig;
-use OCA\Files_External\Service\BackendService;
+use OCP\Files\External\IStoragesBackendService;
 use OCA\Files_External\Service\GlobalStoragesService;
 use OCA\Files_External\Service\UserStoragesService;
 use OCP\IUserManager;
@@ -56,7 +56,7 @@ class Create extends Base {
 	 */
 	private $userManager;
 
-	/** @var BackendService */
+	/** @var IStoragesBackendService */
 	private $backendService;
 
 	/** @var IUserSession */
@@ -66,7 +66,7 @@ class Create extends Base {
 						 UserStoragesService $userService,
 						 IUserManager $userManager,
 						 IUserSession $userSession,
-						 BackendService $backendService
+						 IStoragesBackendService $backendService
 	) {
 		parent::__construct();
 		$this->globalService = $globalService;

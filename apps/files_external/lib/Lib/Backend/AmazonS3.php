@@ -25,7 +25,6 @@ use OCP\IL10N;
 use OCP\Files\External\Auth\AuthMechanism;
 use OCP\Files\External\Backend\Backend;
 use OCP\Files\External\DefinitionParameter;
-use OCA\Files_External\Service\BackendService;
 use OCA\Files_External\Lib\LegacyDependencyCheckPolyfill;
 
 use OCA\Files_External\Lib\Auth\AmazonS3\AccessKey;

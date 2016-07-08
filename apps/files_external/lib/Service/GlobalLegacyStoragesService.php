@@ -22,14 +22,16 @@
 
 namespace OCA\Files_External\Service;
 
+use OCP\Files\External\IStoragesBackendService;
+
 /**
  * Read admin defined mounts from the legacy mount.json
  */
 class GlobalLegacyStoragesService extends LegacyStoragesService {
 	/**
-	 * @param BackendService $backendService
+	 * @param IStoragesBackendService $backendService
 	 */
-	public function __construct(BackendService $backendService) {
+	public function __construct(IStoragesBackendService $backendService) {
 		$this->backendService = $backendService;
 	}
 

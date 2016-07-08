@@ -29,6 +29,7 @@ namespace OCA\Files_External\Service;
 
 use \OC\Files\Filesystem;
 use OCP\Files\External\IStorageConfig;
+use OCP\Files\External\IStoragesBackendService;
 
 /**
  * Service class to manage global external storages
@@ -153,10 +154,10 @@ class GlobalStoragesService extends StoragesService {
 	/**
 	 * Get the visibility type for this controller, used in validation
 	 *
-	 * @return string BackendService::VISIBILITY_* constants
+	 * @return string IStoragesBackendService::VISIBILITY_* constants
 	 */
 	public function getVisibilityType() {
-		return BackendService::VISIBILITY_ADMIN;
+		return IStoragesBackendService::VISIBILITY_ADMIN;
 	}
 
 	protected function isApplicable(IStorageConfig $config) {

@@ -23,6 +23,7 @@
 namespace OCA\Files_External\Service;
 
 use OCP\IUserSession;
+use OCP\Files\External\IStoragesBackendService;
 
 /**
  * Read user defined mounts from the legacy mount.json
@@ -34,10 +35,10 @@ class UserLegacyStoragesService extends LegacyStoragesService {
 	private $userSession;
 
 	/**
-	 * @param BackendService $backendService
+	 * @param IStoragesBackendService $backendService
 	 * @param IUserSession $userSession
 	 */
-	public function __construct(BackendService $backendService, IUserSession $userSession) {
+	public function __construct(IStoragesBackendService $backendService, IUserSession $userSession) {
 		$this->backendService = $backendService;
 		$this->userSession = $userSession;
 	}

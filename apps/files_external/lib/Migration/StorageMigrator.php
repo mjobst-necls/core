@@ -23,7 +23,7 @@
 
 namespace OCA\Files_External\Migration;
 
-use OCA\Files_External\Service\BackendService;
+use OCP\Files\External\IStoragesBackendService;
 use OCA\Files_External\Service\DBConfigService;
 use OCA\Files_External\Service\GlobalLegacyStoragesService;
 use OCA\Files_External\Service\GlobalStoragesService;
@@ -42,7 +42,7 @@ use OCP\IUser;
  */
 class StorageMigrator {
 	/**
-	 * @var BackendService
+	 * @var IStoragesBackendService
 	 */
 	private $backendService;
 
@@ -72,7 +72,7 @@ class StorageMigrator {
 	/**
 	 * StorageMigrator constructor.
 	 *
-	 * @param BackendService $backendService
+	 * @param IStoragesBackendService $backendService
 	 * @param DBConfigService $dbConfig
 	 * @param IConfig $config
 	 * @param IDBConnection $connection
@@ -80,7 +80,7 @@ class StorageMigrator {
 	 * @param IUserMountCache $userMountCache
 	 */
 	public function __construct(
-		BackendService $backendService,
+		IStoragesBackendService $backendService,
 		DBConfigService $dbConfig,
 		IConfig $config,
 		IDBConnection $connection,

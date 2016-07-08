@@ -61,10 +61,10 @@ class OC_Mount_Config {
 	 * @param string $class
 	 * @param array $definition
 	 * @return bool
-	 * @deprecated 8.2.0 use \OCA\Files_External\Service\BackendService::registerBackend()
+	 * @deprecated 8.2.0 use OC::$server->getStoragesBackendService()->registerBackend()
 	 */
 	public static function registerBackend($class, $definition) {
-		$backendService = self::$app->getContainer()->query('OCA\Files_External\Service\BackendService');
+		$backendService = OC::$server->getStoragesBackendService();
 		$auth = self::$app->getContainer()->query('OCA\Files_External\Lib\Auth\Builtin');
 
 		$backendService->registerBackend(new LegacyBackend($class, $definition, $auth));

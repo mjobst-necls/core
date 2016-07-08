@@ -24,12 +24,13 @@
 namespace OCA\Files_External\Service;
 
 use OCP\Files\External\IStorageConfig;
+use OCP\Files\External\IStoragesBackendService;
 
 /**
  * Read mount config from legacy mount.json
  */
 abstract class LegacyStoragesService {
-	/** @var BackendService */
+	/** @var IStoragesBackendService */
 	protected $backendService;
 
 	/**

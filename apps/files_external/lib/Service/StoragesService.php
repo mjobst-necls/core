@@ -27,21 +27,22 @@
 
 namespace OCA\Files_External\Service;
 
-use \OC\Files\Filesystem;
-use OCA\Files_External\Lib\StorageConfig;
+use OC\Files\Filesystem;
 use OCP\Files\External\IStorageConfig;
-use OCA\Files_External\NotFoundException;
-use \OCA\Files_External\Lib\Backend\Backend;
-use \OCA\Files_External\Lib\Auth\AuthMechanism;
+use OCP\Files\External\Backend\Backend;
+use OCP\Files\External\Auth\AuthMechanism;
 use OCP\Files\Config\IUserMountCache;
-use \OCP\Files\StorageNotAvailableException;
+use OCP\Files\StorageNotAvailableException;
+use OCP\Files\External\IStoragesBackendService;
+use OCA\Files_External\Lib\StorageConfig;
+use OCA\Files_External\NotFoundException;
 
 /**
  * Service class to manage external storages
  */
 abstract class StoragesService {
 
-	/** @var BackendService */
+	/** @var IStoragesBackendService */
 	protected $backendService;
 
 	/**
@@ -55,11 +56,11 @@ abstract class StoragesService {
 	protected $userMountCache;
 
 	/**
-	 * @param BackendService $backendService
+	 * @param IStoragesBackendService $backendService
 	 * @param DBConfigService $dbConfigService
 	 * @param IUserMountCache $userMountCache
 	 */
-	public function __construct(BackendService $backendService, DBConfigService $dbConfigService, IUserMountCache $userMountCache) {
+	public function __construct(IStoragesBackendService $backendService, DBConfigService $dbConfigService, IUserMountCache $userMountCache) {
 		$this->backendService = $backendService;
 		$this->dbConfig = $dbConfigService;
 		$this->userMountCache = $userMountCache;
@@ -212,7 +213,7 @@ abstract class StoragesService {
 	/**
 	 * Get the visibility type for this controller, used in validation
 	 *
-	 * @return string BackendService::VISIBILITY_* constants
+	 * @return string IStoragesBackendService::VISIBILITY_* constants
 	 */
 	abstract public function getVisibilityType();
 

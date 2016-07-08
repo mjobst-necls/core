@@ -30,7 +30,7 @@ namespace OCA\Files_External\AppInfo;
 use \OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use \OCP\IContainer;
-use \OCA\Files_External\Service\BackendService;
+use \OCP\Files\External\IStoragesBackendService;
 use \OCP\Files\External\Config\IBackendProvider;
 use \OCP\Files\External\Config\IAuthMechanismProvider;
 
@@ -47,8 +47,11 @@ class Application extends App implements IBackendProvider, IAuthMechanismProvide
 		$container->registerService('OCP\Files\Config\IUserMountCache', function (IAppContainer $c) {
 			return $c->getServer()->query('UserMountCache');
 		});
+		$container->registerService('OCP\Files\External\IStoragesBackendService', function (IAppContainer $c) {
+			return $c->getServer()->query('StoragesBackendService');
+		});
 
-		$backendService = $container->query('OCA\\Files_External\\Service\\BackendService');
+		$backendService = $container->getServer()->query('StoragesBackendService');
 		$backendService->registerBackendProvider($this);
 		$backendService->registerAuthMechanismProvider($this);
 
@@ -66,9 +69,6 @@ class Application extends App implements IBackendProvider, IAuthMechanismProvide
 	 * Register settings templates
 	 */
 	public function registerSettings() {
-		$container = $this->getContainer();
-		$backendService = $container->query('OCA\\Files_External\\Service\\BackendService');
-
 		\OCP\App::registerAdmin('files_external', 'settings');
 		\OCP\App::registerPersonal('files_external', 'personal');
 	}

@@ -26,13 +26,13 @@
 namespace OCA\Files_External\Service;
 
 use OCP\Files\Config\IUserMountCache;
-use \OCP\IUserSession;
-use \OC\Files\Filesystem;
+use OCP\IUserSession;
+use OC\Files\Filesystem;
 
 use OCP\Files\External\IStorageConfig;
 use OCA\Files_External\NotFoundException;
-use \OCA\Files_External\Service\BackendService;
-use \OCA\Files_External\Service\UserTrait;
+use OCP\Files\External\IStoragesBackendService;
+use OCA\Files_External\Service\UserTrait;
 
 /**
  * Service class to manage user external storages
@@ -44,13 +44,13 @@ class UserStoragesService extends StoragesService {
 	/**
 	 * Create a user storages service
 	 *
-	 * @param BackendService $backendService
+	 * @param IStoragesBackendService $backendService
 	 * @param DBConfigService $dbConfig
 	 * @param IUserSession $userSession user session
 	 * @param IUserMountCache $userMountCache
 	 */
 	public function __construct(
-		BackendService $backendService,
+		IStoragesBackendService $backendService,
 		DBConfigService $dbConfig,
 		IUserSession $userSession,
 		IUserMountCache $userMountCache
@@ -131,10 +131,10 @@ class UserStoragesService extends StoragesService {
 	/**
 	 * Get the visibility type for this controller, used in validation
 	 *
-	 * @return string BackendService::VISIBILITY_* constants
+	 * @return string IStoragesBackendService::VISIBILITY_* constants
 	 */
 	public function getVisibilityType() {
-		return BackendService::VISIBILITY_PERSONAL;
+		return IStoragesBackendService::VISIBILITY_PERSONAL;
 	}
 
 	protected function isApplicable(IStorageConfig $config) {

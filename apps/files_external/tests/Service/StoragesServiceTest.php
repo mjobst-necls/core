@@ -26,8 +26,8 @@ namespace OCA\Files_External\Tests\Service;
 use \OC\Files\Filesystem;
 
 use OCA\Files_External\NotFoundException;
-use OCA\Files_External\Lib\StorageConfig;
-use OCA\Files_External\Service\BackendService;
+use OC\Files\External\StorageConfig;
+use OCP\Files\External\IStoragesBackendService;
 use OCA\Files_External\Service\DBConfigService;
 use OCA\Files_External\Service\StoragesService;
 
@@ -57,7 +57,7 @@ abstract class StoragesServiceTest extends \Test\TestCase {
 	 */
 	protected $service;
 
-	/** @var BackendService */
+	/** @var IStoragesBackendService */
 	protected $backendService;
 
 	/**
@@ -95,9 +95,9 @@ abstract class StoragesServiceTest extends \Test\TestCase {
 
 		$this->mountCache = $this->createMock('OCP\Files\Config\IUserMountCache');
 
-		// prepare BackendService mock
+		// prepare IStoragesBackendService mock
 		$this->backendService =
-			$this->getMockBuilder('\OCA\Files_External\Service\BackendService')
+			$this->getMockBuilder('\OCP\Files\External\IStoragesBackendService')
 				->disableOriginalConstructor()
 				->getMock();
 
@@ -152,7 +152,7 @@ abstract class StoragesServiceTest extends \Test\TestCase {
 		$containerMock = $this->createMock('\OCP\AppFramework\IAppContainer');
 		$containerMock->method('query')
 			->will($this->returnCallback(function ($name) {
-				if ($name === 'OCA\Files_External\Service\BackendService') {
+				if ($name === 'OCP\Files\External\IStoragesBackendService') {
 					return $this->backendService;
 				}
 			}));

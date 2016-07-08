@@ -25,7 +25,7 @@ use OCP\IL10N;
 use OCP\Files\External\DefinitionParameter;
 use OCP\Files\External\Auth\AuthMechanism;
 use OCP\Files\External\Backend\Backend;
-use OCA\Files_External\Service\BackendService;
+use OCP\Files\External\IStoragesBackendService;
 use OCA\Files_External\Lib\Auth\Password\SessionCredentials;
 use OCP\Files\External\IStorageConfig;
 use OCA\Files_External\Lib\LegacyDependencyCheckPolyfill;
@@ -53,7 +53,7 @@ class SMB_OC extends Backend {
 				(new DefinitionParameter('root', $l->t('Remote subfolder')))
 					->setFlag(DefinitionParameter::FLAG_OPTIONAL),
 			])
-			->setPriority(BackendService::PRIORITY_DEFAULT - 10)
+			->setPriority(IStoragesBackendService::PRIORITY_DEFAULT - 10)
 			->addAuthScheme(AuthMechanism::SCHEME_PASSWORD)
 			->setLegacyAuthMechanism($legacyAuth)
 			->deprecateTo($smbBackend)

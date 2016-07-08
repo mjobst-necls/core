@@ -26,7 +26,7 @@ use OC\Core\Command\Base;
 use OC\User\NoUserException;
 use OCA\Files_External\Lib\StorageConfig;
 use OCP\Files\External\IStorageConfig;
-use OCA\Files_External\Service\BackendService;
+use OCP\Files\External\IStoragesBackendService;
 use OCA\Files_External\Service\GlobalStoragesService;
 use OCA\Files_External\Service\ImportLegacyStoragesService;
 use OCA\Files_External\Service\UserStoragesService;
@@ -62,7 +62,7 @@ class Import extends Base {
 	/** @var ImportLegacyStoragesService */
 	private $importLegacyStorageService;
 
-	/** @var BackendService */
+	/** @var IStoragesBackendService */
 	private $backendService;
 
 	function __construct(GlobalStoragesService $globalService,
@@ -70,7 +70,7 @@ class Import extends Base {
 						 IUserSession $userSession,
 						 IUserManager $userManager,
 						 ImportLegacyStoragesService $importLegacyStorageService,
-						 BackendService $backendService
+						 IStoragesBackendService $backendService
 	) {
 		parent::__construct();
 		$this->globalService = $globalService;

@@ -20,30 +20,20 @@
  *
  */
 
-namespace OCA\Files_External\Service;
+namespace OC\Files\External;
 
-use \OCP\IConfig;
+use OCP\IConfig;
 
-use \OCP\Files\External\Backend\Backend;
-use \OCP\Files\External\Auth\AuthMechanism;
-use \OCP\Files\External\Config\IBackendProvider;
-use \OCP\Files\External\Config\IAuthMechanismProvider;
+use OCP\Files\External\Backend\Backend;
+use OCP\Files\External\Auth\AuthMechanism;
+use OCP\Files\External\Config\IBackendProvider;
+use OCP\Files\External\Config\IAuthMechanismProvider;
+use OCP\Files\External\IStoragesBackendService;
 
 /**
  * Service class to manage backend definitions
  */
-class BackendService {
-
-	/** Visibility constants for VisibilityTrait */
-	const VISIBILITY_NONE = 0;
-	const VISIBILITY_PERSONAL = 1;
-	const VISIBILITY_ADMIN = 2;
-	//const VISIBILITY_ALIENS = 4;
-
-	const VISIBILITY_DEFAULT = 3; // PERSONAL | ADMIN
-
-	/** Priority constants for PriorityTrait */
-	const PRIORITY_DEFAULT = 100;
+class StoragesBackendService implements IStoragesBackendService {
 
 	/** @var IConfig */
 	protected $config;
@@ -130,7 +120,7 @@ class BackendService {
 	 */
 	public function registerBackend(Backend $backend) {
 		if (!$this->isAllowedUserBackend($backend)) {
-			$backend->removeVisibility(BackendService::VISIBILITY_PERSONAL);
+			$backend->removeVisibility(IStoragesBackendService::VISIBILITY_PERSONAL);
 		}
 		foreach ($backend->getIdentifierAliases() as $alias) {
 			$this->backends[$alias] = $backend;
@@ -154,7 +144,7 @@ class BackendService {
 	 */
 	public function registerAuthMechanism(AuthMechanism $authMech) {
 		if (!$this->isAllowedAuthMechanism($authMech)) {
-			$authMech->removeVisibility(BackendService::VISIBILITY_PERSONAL);
+			$authMech->removeVisibility(IStoragesBackendService::VISIBILITY_PERSONAL);
 		}
 		foreach ($authMech->getIdentifierAliases() as $alias) {
 			$this->authMechanisms[$alias] = $authMech;

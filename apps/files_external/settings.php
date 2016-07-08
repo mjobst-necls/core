@@ -24,13 +24,13 @@
  *
  */
 
-use \OCA\Files_External\Service\BackendService;
+use OCP\Files\External\IStoragesBackendService;
 
 \OCP\User::checkAdminUser();
 
 // we must use the same container
 $appContainer = \OC_Mount_Config::$app->getContainer();
-$backendService = $appContainer->query('OCA\Files_External\Service\BackendService');
+$backendService = \OC::$server->query('StoragesBackendService');
 $globalStoragesService = $appContainer->query('OCA\Files_External\Service\GlobalStoragesService');
 
 \OC_Util::addVendorScript('select2/select2');
@@ -38,7 +38,7 @@ $globalStoragesService = $appContainer->query('OCA\Files_External\Service\Global
 
 $tmpl = new OCP\Template('files_external', 'settings');
 $tmpl->assign('encryptionEnabled', \OC::$server->getEncryptionManager()->isEnabled());
-$tmpl->assign('visibilityType', BackendService::VISIBILITY_ADMIN);
+$tmpl->assign('visibilityType', IStoragesBackendService::VISIBILITY_ADMIN);
 $tmpl->assign('storages', $globalStoragesService->getStorages());
 $tmpl->assign('backends', $backendService->getAvailableBackends());
 $tmpl->assign('authMechanisms', $backendService->getAuthMechanisms());
