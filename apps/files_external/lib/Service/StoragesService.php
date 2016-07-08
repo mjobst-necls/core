@@ -29,6 +29,7 @@ namespace OCA\Files_External\Service;
 
 use \OC\Files\Filesystem;
 use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use OCA\Files_External\NotFoundException;
 use \OCA\Files_External\Lib\Backend\Backend;
 use \OCA\Files_External\Lib\Auth\AuthMechanism;
@@ -124,10 +125,10 @@ abstract class StoragesService {
 		$mounts = $this->readDBConfig();
 		$configs = array_map([$this, 'getStorageConfigFromDBMount'], $mounts);
 		$configs = array_filter($configs, function ($config) {
-			return $config instanceof StorageConfig;
+			return $config instanceof IStorageConfig;
 		});
 
-		$keys = array_map(function (StorageConfig $config) {
+		$keys = array_map(function (IStorageConfig $config) {
 			return $config->getId();
 		}, $configs);
 
@@ -139,7 +140,7 @@ abstract class StoragesService {
 	 *
 	 * @param int $id storage id
 	 *
-	 * @return StorageConfig
+	 * @return IStorageConfig
 	 * @throws NotFoundException if the storage with the given id was not found
 	 */
 	public function getStorage($id) {
@@ -163,12 +164,12 @@ abstract class StoragesService {
 	 * @param StorageConfig $config
 	 * @return bool
 	 */
-	abstract protected function isApplicable(StorageConfig $config);
+	abstract protected function isApplicable(IStorageConfig $config);
 
 	/**
 	 * Gets all storages, valid or not
 	 *
-	 * @return StorageConfig[] array of storage configs
+	 * @return IStorageConfig[] array of storage configs
 	 */
 	public function getAllStorages() {
 		return $this->readConfig();
@@ -177,7 +178,7 @@ abstract class StoragesService {
 	/**
 	 * Gets all valid storages
 	 *
-	 * @return StorageConfig[]
+	 * @return IStorageConfig[]
 	 */
 	public function getStorages() {
 		return array_filter($this->getAllStorages(), [$this, 'validateStorage']);
@@ -187,10 +188,10 @@ abstract class StoragesService {
 	 * Validate storage
 	 * FIXME: De-duplicate with StoragesController::validate()
 	 *
-	 * @param StorageConfig $storage
+	 * @param IStorageConfig $storage
 	 * @return bool
 	 */
-	protected function validateStorage(StorageConfig $storage) {
+	protected function validateStorage(IStorageConfig $storage) {
 		/** @var Backend */
 		$backend = $storage->getBackend();
 		/** @var AuthMechanism */
@@ -223,13 +224,23 @@ abstract class StoragesService {
 	}
 
 	/**
+	 * Creates a new storage configuration
+	 *
+	 * @return IStorageConfig
+	 * @since 9.2.0
+	 */
+	public function createConfig() {
+		return new StorageConfig();
+	}
+
+	/**
 	 * Add new storage to the configuration
 	 *
-	 * @param StorageConfig $newStorage storage attributes
+	 * @param IStorageConfig $newStorage storage attributes
 	 *
-	 * @return StorageConfig storage config, with added id
+	 * @return IStorageConfig storage config, with added id
 	 */
-	public function addStorage(StorageConfig $newStorage) {
+	public function addStorage(IStorageConfig $newStorage) {
 		$allStorages = $this->readConfig();
 
 		$configId = $this->dbConfig->addMount(
@@ -280,7 +291,7 @@ abstract class StoragesService {
 	 * @param array|null $applicableGroups groups for which to mount the storage
 	 * @param int|null $priority priority
 	 *
-	 * @return StorageConfig
+	 * @return IStorageConfig
 	 */
 	public function createStorage(
 		$mountPoint,
@@ -300,7 +311,7 @@ abstract class StoragesService {
 		if (!$authMechanism) {
 			throw new \InvalidArgumentException('Unable to get authentication mechanism for ' . $authMechanismIdentifier);
 		}
-		$newStorage = new StorageConfig();
+		$newStorage = $this->createConfig();
 		$newStorage->setMountPoint($mountPoint);
 		$newStorage->setBackend($backend);
 		$newStorage->setAuthMechanism($authMechanism);
@@ -350,27 +361,27 @@ abstract class StoragesService {
 	 * @param StorageConfig $storage storage data
 	 * @param string $signal signal to trigger
 	 */
-	abstract protected function triggerHooks(StorageConfig $storage, $signal);
+	abstract protected function triggerHooks(IStorageConfig $storage, $signal);
 
 	/**
 	 * Triggers signal_create_mount or signal_delete_mount to
 	 * accommodate for additions/deletions in applicableUsers
 	 * and applicableGroups fields.
 	 *
-	 * @param StorageConfig $oldStorage old storage data
-	 * @param StorageConfig $newStorage new storage data
+	 * @param IStorageConfig $oldStorage old storage data
+	 * @param IStorageConfig $newStorage new storage data
 	 */
-	abstract protected function triggerChangeHooks(StorageConfig $oldStorage, StorageConfig $newStorage);
+	abstract protected function triggerChangeHooks(IStorageConfig $oldStorage, IStorageConfig $newStorage);
 
 	/**
 	 * Update storage to the configuration
 	 *
-	 * @param StorageConfig $updatedStorage storage attributes
+	 * @param IStorageConfig $updatedStorage storage attributes
 	 *
-	 * @return StorageConfig storage config
+	 * @return IStorageConfig storage config
 	 * @throws NotFoundException if the given storage does not exist in the config
 	 */
-	public function updateStorage(StorageConfig $updatedStorage) {
+	public function updateStorage(IStorageConfig $updatedStorage) {
 		$id = $updatedStorage->getId();
 
 		$existingMount = $this->dbConfig->getMountById($id);
@@ -482,10 +493,10 @@ abstract class StoragesService {
 	/**
 	 * Returns the rusty storage id from oc_storages from the given storage config.
 	 *
-	 * @param StorageConfig $storageConfig
+	 * @param IStorageConfig $storageConfig
 	 * @return string rusty storage id
 	 */
-	private function getRustyStorageIdFromConfig(StorageConfig $storageConfig) {
+	private function getRustyStorageIdFromConfig(IStorageConfig $storageConfig) {
 		// if any of the storage options contains $user, it is not possible
 		// to compute the possible storage id as we don't know which users
 		// mounted it already (and we certainly don't want to iterate over ALL users)
@@ -508,10 +519,10 @@ abstract class StoragesService {
 	/**
 	 * Construct the storage implementation
 	 *
-	 * @param StorageConfig $storageConfig
+	 * @param IStorageConfig $storageConfig
 	 * @return int
 	 */
-	private function getStorageId(StorageConfig $storageConfig) {
+	private function getStorageId(IStorageConfig $storageConfig) {
 		try {
 			$class = $storageConfig->getBackend()->getStorageClass();
 			/** @var \OC\Files\Storage\Storage $storage */

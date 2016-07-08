@@ -23,7 +23,7 @@
 
 namespace OCP\Files\External\Auth;
 
-use \OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use \OC\Files\External\VisibilityTrait;
 use \OC\Files\External\IdentifierTrait;
 use \OC\Files\External\FrontendDefinitionTrait;
@@ -105,12 +105,12 @@ class AuthMechanism implements \JsonSerializable {
 	}
 
 	/**
-	 * Check if parameters are satisfied in a StorageConfig
+	 * Check if parameters are satisfied in a IStorageConfig
 	 *
-	 * @param StorageConfig $storage
+	 * @param IStorageConfig $storage
 	 * @return bool
 	 */
-	public function validateStorage(StorageConfig $storage) {
+	public function validateStorage(IStorageConfig $storage) {
 		// does the backend actually support this scheme
 		$supportedSchemes = $storage->getBackend()->getAuthSchemes();
 		if (!isset($supportedSchemes[$this->getScheme()])) {

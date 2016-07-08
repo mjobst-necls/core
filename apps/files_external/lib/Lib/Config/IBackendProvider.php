@@ -21,8 +21,6 @@
 
 namespace OCA\Files_External\Lib\Config;
 
-use \OCA\Files_External\Lib\Backend\Backend;
-
 /**
  * Provider of external storage backends
  * @since 9.1.0

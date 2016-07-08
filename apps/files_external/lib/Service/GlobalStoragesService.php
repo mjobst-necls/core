@@ -28,7 +28,7 @@ namespace OCA\Files_External\Service;
 
 
 use \OC\Files\Filesystem;
-use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 
 /**
  * Service class to manage global external storages
@@ -38,10 +38,10 @@ class GlobalStoragesService extends StoragesService {
 	 * Triggers $signal for all applicable users of the given
 	 * storage
 	 *
-	 * @param StorageConfig $storage storage data
+	 * @param IStorageConfig $storage storage data
 	 * @param string $signal signal to trigger
 	 */
-	protected function triggerHooks(StorageConfig $storage, $signal) {
+	protected function triggerHooks(IStorageConfig $storage, $signal) {
 		// FIXME: Use as expression in empty once PHP 5.4 support is dropped
 		$applicableUsers = $storage->getApplicableUsers();
 		$applicableGroups = $storage->getApplicableGroups();
@@ -75,10 +75,10 @@ class GlobalStoragesService extends StoragesService {
 	 * accommodate for additions/deletions in applicableUsers
 	 * and applicableGroups fields.
 	 *
-	 * @param StorageConfig $oldStorage old storage config
-	 * @param StorageConfig $newStorage new storage config
+	 * @param IStorageConfig $oldStorage old storage config
+	 * @param IStorageConfig $newStorage new storage config
 	 */
-	protected function triggerChangeHooks(StorageConfig $oldStorage, StorageConfig $newStorage) {
+	protected function triggerChangeHooks(IStorageConfig $oldStorage, IStorageConfig $newStorage) {
 		// if mount point changed, it's like a deletion + creation
 		if ($oldStorage->getMountPoint() !== $newStorage->getMountPoint()) {
 			$this->triggerHooks($oldStorage, Filesystem::signal_delete_mount);
@@ -159,7 +159,7 @@ class GlobalStoragesService extends StoragesService {
 		return BackendService::VISIBILITY_ADMIN;
 	}
 
-	protected function isApplicable(StorageConfig $config) {
+	protected function isApplicable(IStorageConfig $config) {
 		return true;
 	}
 
@@ -172,10 +172,10 @@ class GlobalStoragesService extends StoragesService {
 		$mounts = $this->dbConfig->getAllMounts();
 		$configs = array_map([$this, 'getStorageConfigFromDBMount'], $mounts);
 		$configs = array_filter($configs, function ($config) {
-			return $config instanceof StorageConfig;
+			return $config instanceof IStorageConfig;
 		});
 
-		$keys = array_map(function (StorageConfig $config) {
+		$keys = array_map(function (IStorageConfig $config) {
 			return $config->getId();
 		}, $configs);
 

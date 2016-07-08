@@ -23,6 +23,7 @@
 namespace OCA\Files_External\Tests\Command;
 
 use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use OCA\Files_External\NotFoundException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -32,7 +33,7 @@ use Test\TestCase;
 
 abstract class CommandTest extends TestCase {
 	/**
-	 * @param StorageConfig[] $mounts
+	 * @param IStorageConfig[] $mounts
 	 * @return \OCA\Files_External\Service\GlobalStoragesService|\PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected function getGlobalStorageService(array $mounts = []) {
@@ -47,7 +48,7 @@ abstract class CommandTest extends TestCase {
 
 	/**
 	 * @param \PHPUnit_Framework_MockObject_MockObject $mock
-	 * @param StorageConfig[] $mounts
+	 * @param IStorageConfig[] $mounts
 	 */
 	protected function bindMounts(\PHPUnit_Framework_MockObject_MockObject $mock, array $mounts) {
 		$mock->expects($this->any())
@@ -71,9 +72,10 @@ abstract class CommandTest extends TestCase {
 	 * @param array $options
 	 * @param array $users
 	 * @param array $groups
-	 * @return StorageConfig
+	 * @return IStorageConfig
 	 */
 	protected function getMount($id, $mountPoint, $backendClass, $applicableIdentifier = 'password::password', $config = [], $options = [], $users = [], $groups = []) {
+		// FIXME: use mock
 		$mount = new StorageConfig($id);
 
 		$mount->setMountPoint($mountPoint);

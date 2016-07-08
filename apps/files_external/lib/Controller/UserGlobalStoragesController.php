@@ -34,7 +34,7 @@ use \OCP\AppFramework\Http\DataResponse;
 use \OCP\AppFramework\Http;
 use OCA\Files_External\Service\UserGlobalStoragesService;
 use OCA\Files_External\NotFoundException;
-use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use \OCA\Files_External\Lib\Backend\Backend;
 use OCP\IUserSession;
 
@@ -95,7 +95,7 @@ class UserGlobalStoragesController extends StoragesController {
 		);
 	}
 
-	protected function manipulateStorageConfig(StorageConfig $storage) {
+	protected function manipulateStorageConfig(IStorageConfig $storage) {
 		/** @var AuthMechanism */
 		$authMechanism = $storage->getAuthMechanism();
 		$authMechanism->manipulateStorageConfig($storage, $this->userSession->getUser());
@@ -186,11 +186,11 @@ class UserGlobalStoragesController extends StoragesController {
 	}
 
 	/**
-	 * Remove sensitive data from a StorageConfig before returning it to the user
+	 * Remove sensitive data from a IStorageConfig before returning it to the user
 	 *
-	 * @param StorageConfig $storage
+	 * @param IStorageConfig $storage
 	 */
-	protected function sanitizeStorage(StorageConfig $storage) {
+	protected function sanitizeStorage(IStorageConfig $storage) {
 		$storage->setBackendOptions([]);
 		$storage->setMountOptions([]);
 

@@ -35,7 +35,7 @@ use OCP\Files\Config\IMountProvider;
 use OCP\IUser;
 use OCA\Files_External\Service\UserStoragesService;
 use OCA\Files_External\Service\UserGlobalStoragesService;
-use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use OC\Files\Storage\FailedStorage;
 use OCP\Files\StorageNotAvailableException;
 
@@ -70,10 +70,10 @@ class ConfigAdapter implements IMountProvider {
 	/**
 	 * Process storage ready for mounting
 	 *
-	 * @param StorageConfig $storage
+	 * @param IStorageConfig $storage
 	 * @param IUser $user
 	 */
-	private function prepareStorageConfig(StorageConfig &$storage, IUser $user) {
+	private function prepareStorageConfig(IStorageConfig &$storage, IUser $user) {
 		foreach ($storage->getBackendOptions() as $option => $value) {
 			$storage->setBackendOption($option, \OC_Mount_Config::setUserVars(
 				$user->getUID(), $value
@@ -96,10 +96,10 @@ class ConfigAdapter implements IMountProvider {
 	/**
 	 * Construct the storage implementation
 	 *
-	 * @param StorageConfig $storageConfig
+	 * @param IStorageConfig $storageConfig
 	 * @return Storage
 	 */
-	private function constructStorage(StorageConfig $storageConfig) {
+	private function constructStorage(IStorageConfig $storageConfig) {
 		$class = $storageConfig->getBackend()->getStorageClass();
 		$storage = new $class($storageConfig->getBackendOptions());
 

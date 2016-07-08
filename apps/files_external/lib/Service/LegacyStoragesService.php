@@ -23,7 +23,7 @@
 
 namespace OCA\Files_External\Service;
 
-use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 
 /**
  * Read mount config from legacy mount.json
@@ -42,12 +42,12 @@ abstract class LegacyStoragesService {
 	/**
 	 * Copy legacy storage options into the given storage config object.
 	 *
-	 * @param StorageConfig $storageConfig storage config to populate
+	 * @param IStorageConfig $storageConfig storage config to populate
 	 * @param string $mountType mount type
 	 * @param string $applicable applicable user or group
 	 * @param array $storageOptions legacy storage options
 	 *
-	 * @return StorageConfig populated storage config
+	 * @return IStorageConfig populated storage config
 	 */
 	protected function populateStorageConfigWithLegacyOptions(
 		&$storageConfig,
@@ -95,7 +95,7 @@ abstract class LegacyStoragesService {
 	/**
 	 * Read the external storages config
 	 *
-	 * @return StorageConfig[] map of storage id to storage config
+	 * @return IStorageConfig[] map of storage id to storage config
 	 */
 	public function getAllStorages() {
 		$mountPoints = $this->readLegacyConfig();
@@ -117,7 +117,7 @@ abstract class LegacyStoragesService {
 		 *     - "mountOptions": mount-specific options (ex: disable previews, scanner, etc)
 		 */
 		// group by storage id
-		/** @var StorageConfig[] $storages */
+		/** @var IStorageConfig[] $storages */
 		$storages = [];
 		// for storages without id (legacy), group by config hash for
 		// later processing
@@ -174,7 +174,7 @@ abstract class LegacyStoragesService {
 					}
 					if (is_null($currentStorage)) {
 						// create new
-						$currentStorage = new StorageConfig($configId);
+						$currentStorage = new IStorageConfig($configId);
 						$currentStorage->setMountPoint($relativeMountPath);
 					}
 					try {

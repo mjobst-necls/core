@@ -35,7 +35,7 @@ use \OCP\AppFramework\Http\DataResponse;
 use \OCP\AppFramework\Http;
 use OCA\Files_External\Service\UserStoragesService;
 use OCA\Files_External\NotFoundException;
-use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use \OCA\Files_External\Lib\Backend\Backend;
 
 /**
@@ -75,7 +75,7 @@ class UserStoragesController extends StoragesController {
 		$this->userSession = $userSession;
 	}
 
-	protected function manipulateStorageConfig(StorageConfig $storage) {
+	protected function manipulateStorageConfig(IStorageConfig $storage) {
 		/** @var AuthMechanism */
 		$authMechanism = $storage->getAuthMechanism();
 		$authMechanism->manipulateStorageConfig($storage, $this->userSession->getUser());

@@ -27,7 +27,7 @@ use \OCA\Files_External\Lib\DefinitionParameter;
 use \OCA\Files_External\Lib\Auth\AuthMechanism;
 use \OCA\Files_External\Service\BackendService;
 use \OCA\Files_External\Lib\Auth\Password\SessionCredentials;
-use \OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use \OCA\Files_External\Lib\LegacyDependencyCheckPolyfill;
 use \OCA\Files_External\Lib\Backend\SMB;
 use OCP\IUser;
@@ -60,7 +60,7 @@ class SMB_OC extends Backend {
 		;
 	}
 
-	public function manipulateStorageConfig(StorageConfig &$storage, IUser $user = null) {
+	public function manipulateStorageConfig(IStorageConfig &$storage, IUser $user = null) {
 		$username_as_share = ($storage->getBackendOption('username_as_share') === true);
 
 		if ($username_as_share) {

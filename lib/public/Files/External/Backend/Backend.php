@@ -22,7 +22,7 @@
 
 namespace OCP\Files\External\Backend;
 
-use \OCA\Files_External\Lib\StorageConfig;
+use \OCP\Files\External\IStorageConfig;
 use \OC\Files\External\VisibilityTrait;
 use \OC\Files\External\FrontendDefinitionTrait;
 use \OC\Files\External\PriorityTrait;
@@ -155,12 +155,12 @@ class Backend implements \JsonSerializable {
 	}
 
 	/**
-	 * Check if parameters are satisfied in a StorageConfig
+	 * Check if parameters are satisfied in a IStorageConfig
 	 *
-	 * @param StorageConfig $storage
+	 * @param IStorageConfig $storage
 	 * @return bool
 	 */
-	public function validateStorage(StorageConfig $storage) {
+	public function validateStorage(IStorageConfig $storage) {
 		return $this->validateStorageDefinition($storage);
 	}
 

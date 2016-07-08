@@ -25,7 +25,7 @@ namespace OCA\Files_External\Service;
 use OCP\Files\Config\IUserMountCache;
 use \OCP\IUserSession;
 use \OCP\IGroupManager;
-use \OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 
 /**
  * Service class to read global storages applicable to the user
@@ -60,8 +60,8 @@ class UserGlobalStoragesService extends GlobalStoragesService {
 	/**
 	 * Replace config hash ID with real IDs, for migrating legacy storages
 	 *
-	 * @param StorageConfig[] $storages Storages with real IDs
-	 * @param StorageConfig[] $storagesWithConfigHash Storages with config hash IDs
+	 * @param IStorageConfig[] $storages Storages with real IDs
+	 * @param IStorageConfig[] $storagesWithConfigHash Storages with config hash IDs
 	 */
 	protected function setRealStorageIds(array &$storages, array $storagesWithConfigHash) {
 		// as a read-only view, storage IDs don't need to be real
@@ -82,11 +82,11 @@ class UserGlobalStoragesService extends GlobalStoragesService {
 		return array_merge($userMounts, $groupMounts, $globalMounts);
 	}
 
-	public function addStorage(StorageConfig $newStorage) {
+	public function addStorage(IStorageConfig $newStorage) {
 		throw new \DomainException('UserGlobalStoragesService writing disallowed');
 	}
 
-	public function updateStorage(StorageConfig $updatedStorage) {
+	public function updateStorage(IStorageConfig $updatedStorage) {
 		throw new \DomainException('UserGlobalStoragesService writing disallowed');
 	}
 
@@ -101,7 +101,7 @@ class UserGlobalStoragesService extends GlobalStoragesService {
 	 * Get unique storages, in case two are defined with the same mountpoint
 	 * Higher priority storages take precedence
 	 *
-	 * @return StorageConfig[]
+	 * @return IStorageConfig[]
 	 */
 	public function getUniqueStorages() {
 		$storages = $this->getStorages();
@@ -137,10 +137,10 @@ class UserGlobalStoragesService extends GlobalStoragesService {
 	 * Get a priority 'type', where a bigger number means higher priority
 	 * user applicable > group applicable > 'all'
 	 *
-	 * @param StorageConfig $storage
+	 * @param IStorageConfig $storage
 	 * @return int
 	 */
-	protected function getPriorityType(StorageConfig $storage) {
+	protected function getPriorityType(IStorageConfig $storage) {
 		$applicableUsers = $storage->getApplicableUsers();
 		$applicableGroups = $storage->getApplicableGroups();
 
@@ -153,7 +153,7 @@ class UserGlobalStoragesService extends GlobalStoragesService {
 		return 0;
 	}
 
-	protected function isApplicable(StorageConfig $config) {
+	protected function isApplicable(IStorageConfig $config) {
 		$applicableUsers = $config->getApplicableUsers();
 		$applicableGroups = $config->getApplicableGroups();
 

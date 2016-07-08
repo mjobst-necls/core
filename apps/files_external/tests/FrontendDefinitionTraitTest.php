@@ -72,7 +72,7 @@ class FrontendDefinitionTraitTest extends \Test\TestCase {
 			$backendParams[] = $param;
 		}
 
-		$storageConfig = $this->getMockBuilder('\OCA\Files_External\Lib\StorageConfig')
+		$storageConfig = $this->getMockBuilder('\OCP\Files\External\IStorageConfig')
 			->disableOriginalConstructor()
 			->getMock();
 		$storageConfig->expects($this->any())
@@ -101,7 +101,7 @@ class FrontendDefinitionTraitTest extends \Test\TestCase {
 				return true;
 			}));
 
-		$storageConfig = $this->getMockBuilder('\OCA\Files_External\Lib\StorageConfig')
+		$storageConfig = $this->getMockBuilder('\OCP\Files\External\IStorageConfig')
 			->disableOriginalConstructor()
 			->getMock();
 		$storageConfig->expects($this->once())

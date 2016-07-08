@@ -22,7 +22,7 @@
 
 namespace OCP\Files\External\Config;
 
-use \OCA\Files_External\Lib\Backend\Backend;
+use \OCP\Files\External\Backend\Backend;
 
 /**
  * Provider of external storage backends

@@ -23,7 +23,7 @@
 namespace OC\Files\External;
 
 use \OCA\Files_External\Lib\DefinitionParameter;
-use \OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 
 /**
  * Trait for objects that have a frontend representation
@@ -137,12 +137,12 @@ trait FrontendDefinitionTrait {
 	}
 
 	/**
-	 * Check if parameters are satisfied in a StorageConfig
+	 * Check if parameters are satisfied in a IStorageConfig
 	 *
-	 * @param StorageConfig $storage
+	 * @param IStorageConfig $storage
 	 * @return bool
 	 */
-	public function validateStorageDefinition(StorageConfig $storage) {
+	public function validateStorageDefinition(IStorageConfig $storage) {
 		foreach ($this->getParameters() as $name => $parameter) {
 			$value = $storage->getBackendOption($name);
 			if (!is_null($value) || !$parameter->isOptional()) {

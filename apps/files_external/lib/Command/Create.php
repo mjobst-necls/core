@@ -28,7 +28,7 @@ use OC\User\NoUserException;
 use OCA\Files_External\Lib\Auth\AuthMechanism;
 use OCA\Files_External\Lib\Backend\Backend;
 use OCA\Files_External\Lib\DefinitionParameter;
-use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use OCA\Files_External\Service\BackendService;
 use OCA\Files_External\Service\GlobalStoragesService;
 use OCA\Files_External\Service\UserStoragesService;
@@ -158,7 +158,7 @@ class Create extends Base {
 			$config[$key] = $value;
 		}
 
-		$mount = new StorageConfig();
+		$mount = $this->getStorageService($user)->createStorageConfig();
 		$mount->setMountPoint($mountPoint);
 		$mount->setBackend($storageBackend);
 		$mount->setAuthMechanism($authBackend);
@@ -199,7 +199,7 @@ class Create extends Base {
 		return false;
 	}
 
-	private function showMount($user, StorageConfig $mount, InputInterface $input, OutputInterface $output) {
+	private function showMount($user, IStorageConfig $mount, InputInterface $input, OutputInterface $output) {
 		$listCommand = new ListCommand($this->globalService, $this->userService, $this->userSession, $this->userManager);
 		$listInput = new ArrayInput([], $listCommand->getDefinition());
 		$listInput->setOption('output', $input->getOption('output'));

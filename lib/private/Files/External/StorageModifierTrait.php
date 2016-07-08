@@ -23,14 +23,14 @@ namespace OC\Files\External;
 
 use \OCP\IUser;
 use \OCP\Files\Storage;
-use \OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use \OCA\Files_External\Lib\InsufficientDataForMeaningfulAnswerException;
 use \OCP\Files\StorageNotAvailableException;
 
 /**
- * Trait for objects that can modify StorageConfigs and wrap Storages
+ * Trait for objects that can modify IStorageConfigs and wrap Storages
  *
- * When a storage implementation is being prepared for use, the StorageConfig
+ * When a storage implementation is being prepared for use, the IStorageConfig
  * is passed through manipulateStorageConfig() to update any parameters as
  * necessary. After the storage implementation has been constructed, it is
  * passed through wrapStorage(), potentially replacing the implementation with
@@ -43,14 +43,14 @@ use \OCP\Files\StorageNotAvailableException;
 trait StorageModifierTrait {
 
 	/**
-	 * Modify a StorageConfig parameters
+	 * Modify a IStorageConfig parameters
 	 *
-	 * @param StorageConfig $storage
+	 * @param IStorageConfig $storage
 	 * @param IUser $user User the storage is being used as
 	 * @throws InsufficientDataForMeaningfulAnswerException
 	 * @throws StorageNotAvailableException
 	 */
-	public function manipulateStorageConfig(StorageConfig &$storage, IUser $user = null) {
+	public function manipulateStorageConfig(IStorageConfig &$storage, IUser $user = null) {
 	}
 
 	/**

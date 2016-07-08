@@ -26,7 +26,7 @@ use OC\Core\Command\Base;
 use OCA\Files_External\Lib\Auth\AuthMechanism;
 use OCA\Files_External\Lib\Backend\Backend;
 use OCA\Files_External\Lib\InsufficientDataForMeaningfulAnswerException;
-use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use OCA\Files_External\NotFoundException;
 use OCA\Files_External\Service\GlobalStoragesService;
 use OCP\Files\StorageNotAvailableException;
@@ -83,7 +83,7 @@ class Verify extends Base {
 		]);
 	}
 
-	private function manipulateStorageConfig(StorageConfig $storage) {
+	private function manipulateStorageConfig(IStorageConfig $storage) {
 		/** @var AuthMechanism */
 		$authMechanism = $storage->getAuthMechanism();
 		$authMechanism->manipulateStorageConfig($storage);
@@ -92,7 +92,7 @@ class Verify extends Base {
 		$backend->manipulateStorageConfig($storage);
 	}
 
-	private function updateStorageStatus(StorageConfig &$storage, $configInput, OutputInterface $output) {
+	private function updateStorageStatus(IStorageConfig &$storage, $configInput, OutputInterface $output) {
 		try {
 			try {
 				$this->manipulateStorageConfig($storage);

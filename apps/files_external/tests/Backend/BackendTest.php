@@ -65,7 +65,7 @@ class BackendTest extends \Test\TestCase {
 			->method('validateStorageDefinition')
 			->willReturn($definitionSuccess);
 
-		$storageConfig = $this->getMockBuilder('\OCA\Files_External\Lib\StorageConfig')
+		$storageConfig = $this->getMockBuilder('\OCP\Files\External\IStorageConfig')
 			->disableOriginalConstructor()
 			->getMock();
 

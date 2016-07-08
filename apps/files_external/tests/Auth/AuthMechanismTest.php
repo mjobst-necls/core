@@ -67,7 +67,7 @@ class AuthMechanismTest extends \Test\TestCase {
 			->method('getAuthSchemes')
 			->willReturn(['scheme' => true, 'foobar' => true]);
 
-		$storageConfig = $this->getMockBuilder('\OCA\Files_External\Lib\StorageConfig')
+		$storageConfig = $this->getMockBuilder('\OCP\Files\External\IStorageConfig')
 			->disableOriginalConstructor()
 			->getMock();
 		$storageConfig->expects($this->once())

@@ -29,7 +29,7 @@ use OCP\Files\Config\IUserMountCache;
 use \OCP\IUserSession;
 use \OC\Files\Filesystem;
 
-use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use OCA\Files_External\NotFoundException;
 use \OCA\Files_External\Service\BackendService;
 use \OCA\Files_External\Service\UserTrait;
@@ -67,10 +67,10 @@ class UserStoragesService extends StoragesService {
 	 * Triggers $signal for all applicable users of the given
 	 * storage
 	 *
-	 * @param StorageConfig $storage storage data
+	 * @param IStorageConfig $storage storage data
 	 * @param string $signal signal to trigger
 	 */
-	protected function triggerHooks(StorageConfig $storage, $signal) {
+	protected function triggerHooks(IStorageConfig $storage, $signal) {
 		$user = $this->getUser()->getUID();
 
 		// trigger hook for the current user
@@ -87,10 +87,10 @@ class UserStoragesService extends StoragesService {
 	 * accommodate for additions/deletions in applicableUsers
 	 * and applicableGroups fields.
 	 *
-	 * @param StorageConfig $oldStorage old storage data
-	 * @param StorageConfig $newStorage new storage data
+	 * @param IStorageConfig $oldStorage old storage data
+	 * @param IStorageConfig $newStorage new storage data
 	 */
-	protected function triggerChangeHooks(StorageConfig $oldStorage, StorageConfig $newStorage) {
+	protected function triggerChangeHooks(IStorageConfig $oldStorage, IStorageConfig $newStorage) {
 		// if mount point changed, it's like a deletion + creation
 		if ($oldStorage->getMountPoint() !== $newStorage->getMountPoint()) {
 			$this->triggerHooks($oldStorage, Filesystem::signal_delete_mount);
@@ -105,11 +105,11 @@ class UserStoragesService extends StoragesService {
 	/**
 	 * Add new storage to the configuration
 	 *
-	 * @param StorageConfig $newStorage storage attributes
+	 * @param IStorageConfig $newStorage storage attributes
 	 *
-	 * @return StorageConfig storage config, with added id
+	 * @return IStorageConfig storage config, with added id
 	 */
-	public function addStorage(StorageConfig $newStorage) {
+	public function addStorage(IStorageConfig $newStorage) {
 		$newStorage->setApplicableUsers([$this->getUser()->getUID()]);
 		$config = parent::addStorage($newStorage);
 		return $config;
@@ -118,12 +118,12 @@ class UserStoragesService extends StoragesService {
 	/**
 	 * Update storage to the configuration
 	 *
-	 * @param StorageConfig $updatedStorage storage attributes
+	 * @param IStorageConfig $updatedStorage storage attributes
 	 *
-	 * @return StorageConfig storage config
+	 * @return IStorageConfig storage config
 	 * @throws NotFoundException if the given storage does not exist in the config
 	 */
-	public function updateStorage(StorageConfig $updatedStorage) {
+	public function updateStorage(IStorageConfig $updatedStorage) {
 		$updatedStorage->setApplicableUsers([$this->getUser()->getUID()]);
 		return parent::updateStorage($updatedStorage);
 	}
@@ -137,7 +137,7 @@ class UserStoragesService extends StoragesService {
 		return BackendService::VISIBILITY_PERSONAL;
 	}
 
-	protected function isApplicable(StorageConfig $config) {
-		return ($config->getApplicableUsers() === [$this->getUser()->getUID()]) && $config->getType() === StorageConfig::MOUNT_TYPE_PERSONAl;
+	protected function isApplicable(IStorageConfig $config) {
+		return ($config->getApplicableUsers() === [$this->getUser()->getUID()]) && $config->getType() === IStorageConfig::MOUNT_TYPE_PERSONAl;
 	}
 }

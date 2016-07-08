@@ -28,6 +28,7 @@ use OCA\Files_External\Lib\Auth\Password\Password;
 use OCA\Files_External\Lib\Auth\Password\SessionCredentials;
 use OCA\Files_External\Lib\Backend\Local;
 use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class ListCommandTest extends CommandTest {
@@ -52,6 +53,7 @@ class ListCommandTest extends CommandTest {
 		$session = $this->createMock('\OCP\ISession');
 		$crypto = $this->createMock('\OCP\Security\ICrypto');
 		$instance = $this->getInstance();
+		// FIXME: use mock of IStorageConfig
 		$mount1 = new StorageConfig();
 		$mount1->setAuthMechanism(new Password($l10n));
 		$mount1->setBackend(new Local($l10n, new NullMechanism($l10n)));

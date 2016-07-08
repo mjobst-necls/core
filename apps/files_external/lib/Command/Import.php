@@ -25,6 +25,7 @@ namespace OCA\Files_External\Command;
 use OC\Core\Command\Base;
 use OC\User\NoUserException;
 use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use OCA\Files_External\Service\BackendService;
 use OCA\Files_External\Service\GlobalStoragesService;
 use OCA\Files_External\Service\ImportLegacyStoragesService;
@@ -188,6 +189,7 @@ class Import extends Base {
 	}
 
 	private function parseData(array $data) {
+		// FIXME: use service to create config
 		$mount = new StorageConfig($data['mount_id']);
 		$mount->setMountPoint($data['mount_point']);
 		$mount->setBackend($this->getBackendByClass($data['storage']));

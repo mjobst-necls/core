@@ -23,7 +23,7 @@
 namespace OCA\Files_External\Command;
 
 use OC\Core\Command\Base;
-use OCA\Files_External\Lib\StorageConfig;
+use OCP\Files\External\IStorageConfig;
 use OCA\Files_External\NotFoundException;
 use OCA\Files_External\Service\GlobalStoragesService;
 use OCP\IGroupManager;
@@ -106,7 +106,7 @@ class Applicable extends Base {
 			return 404;
 		}
 
-		if ($mount->getType() === StorageConfig::MOUNT_TYPE_PERSONAl) {
+		if ($mount->getType() === IStorageConfig::MOUNT_TYPE_PERSONAl) {
 			$output->writeln('<error>Can\'t change applicables on personal mounts</error>');
 			return 1;
 		}
