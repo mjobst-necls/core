@@ -22,10 +22,11 @@
 
 namespace OCP\Files\External\Config;
 
-use \OCA\Files_External\Lib\Auth\AuthMechanism;
+use OCP\Files\External\Auth\AuthMechanism;
 
 /**
  * Provider of external storage auth mechanisms
+ *
  * @since 9.2.0
  */
 interface IAuthMechanismProvider {

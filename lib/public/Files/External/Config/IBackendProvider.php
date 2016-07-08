@@ -22,10 +22,11 @@
 
 namespace OCP\Files\External\Config;
 
-use \OCP\Files\External\Backend\Backend;
+use OCP\Files\External\Backend\Backend;
 
 /**
  * Provider of external storage backends
+ *
  * @since 9.2.0
  */
 interface IBackendProvider {

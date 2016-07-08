@@ -22,14 +22,14 @@
 
 namespace OCP\Files\External\Backend;
 
-use \OCP\Files\External\IStorageConfig;
-use \OC\Files\External\VisibilityTrait;
-use \OC\Files\External\FrontendDefinitionTrait;
-use \OC\Files\External\PriorityTrait;
-use \OC\Files\External\DependencyTrait;
-use \OC\Files\External\StorageModifierTrait;
-use \OC\Files\External\IdentifierTrait;
-use \OCP\Files\External\Auth\AuthMechanism;
+use OC\Files\External\VisibilityTrait;
+use OC\Files\External\FrontendDefinitionTrait;
+use OC\Files\External\PriorityTrait;
+use OC\Files\External\DependencyTrait;
+use OC\Files\External\StorageModifierTrait;
+use OC\Files\External\IdentifierTrait;
+use OCP\Files\External\Auth\AuthMechanism;
+use OCP\Files\External\IStorageConfig;
 
 /**
  * Storage backend

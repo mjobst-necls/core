@@ -23,11 +23,11 @@
 
 namespace OCP\Files\External\Auth;
 
+use OC\Files\External\VisibilityTrait;
+use OC\Files\External\IdentifierTrait;
+use OC\Files\External\FrontendDefinitionTrait;
+use OC\Files\External\StorageModifierTrait;
 use OCP\Files\External\IStorageConfig;
-use \OC\Files\External\VisibilityTrait;
-use \OC\Files\External\IdentifierTrait;
-use \OC\Files\External\FrontendDefinitionTrait;
-use \OC\Files\External\StorageModifierTrait;
 
 /**
  * Authentication mechanism
