@@ -19,7 +19,7 @@
  *
  */
 
-namespace OCA\Files_External\Lib;
+namespace OC\Files\External;
 
 /**
  * Trait for objects requiring an identifier (and/or identifier aliases)

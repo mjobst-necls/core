@@ -20,7 +20,7 @@
  *
  */
 
-namespace OCA\Files_External\Lib;
+namespace OC\Files\External;
 
 use \OCA\Files_External\Lib\DefinitionParameter;
 use \OCA\Files_External\Lib\StorageConfig;

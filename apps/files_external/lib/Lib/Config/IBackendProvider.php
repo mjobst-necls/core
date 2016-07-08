@@ -26,13 +26,7 @@ use \OCA\Files_External\Lib\Backend\Backend;
 /**
  * Provider of external storage backends
  * @since 9.1.0
+ * @deprecated use \OCP\Files\External\Config\IBackendProvider
  */
-interface IBackendProvider {
-
-	/**
-	 * @since 9.1.0
-	 * @return Backend[]
-	 */
-	public function getBackends();
-
+interface IBackendProvider extends \OCP\Files\External\Config\IBackendProvider {
 }

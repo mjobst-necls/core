@@ -1,8 +1,9 @@
 <?php
 /**
  * @author Robin McCorkell <robin@mccorkell.me.uk>
+ * @author Vincent Petry <pvince81@owncloud.com>
  *
- * @copyright Copyright (c) 2016, ownCloud GmbH.
+ * @copyright Copyright (c) 2016, ownCloud, Inc.
  * @license AGPL-3.0
  *
  * This code is free software: you can redistribute it and/or modify
@@ -19,12 +20,20 @@
  *
  */
 
-namespace OCA\Files_External\Lib\Backend;
+namespace OCP\Files\External\Config;
+
+use \OCA\Files_External\Lib\Backend\Backend;
 
 /**
- * @deprecated use \OCP\Files\External\Backend instead
+ * Provider of external storage backends
+ * @since 9.2.0
  */
-class Backend extends \OCP\Files\External\Backend\Backend {
+interface IBackendProvider {
+
+	/**
+	 * @since 9.1.0
+	 * @return Backend[]
+	 */
+	public function getBackends();
 
 }
-

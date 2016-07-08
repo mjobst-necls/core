@@ -19,12 +19,23 @@
  *
  */
 
-namespace OCA\Files_External\Lib\Backend;
+namespace OC\Files\External;
+
+use \OCA\Files_External\Lib\MissingDependency;
 
 /**
- * @deprecated use \OCP\Files\External\Backend instead
+ * Trait for objects that have dependencies for use
  */
-class Backend extends \OCP\Files\External\Backend\Backend {
+trait DependencyTrait {
+
+	/**
+	 * Check if object is valid for use
+	 *
+	 * @return MissingDependency[] Unsatisfied dependencies
+	 */
+	public function checkDependencies() {
+		return []; // no dependencies by default
+	}
 
 }
 

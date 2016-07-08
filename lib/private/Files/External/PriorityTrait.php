@@ -19,7 +19,7 @@
  *
  */
 
-namespace OCA\Files_External\Lib;
+namespace OC\Files\External;
 
 use \OCA\Files_External\Service\BackendService;
 

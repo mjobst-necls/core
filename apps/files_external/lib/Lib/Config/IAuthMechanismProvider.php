@@ -26,13 +26,7 @@ use \OCA\Files_External\Lib\Auth\AuthMechanism;
 /**
  * Provider of external storage auth mechanisms
  * @since 9.1.0
+ * @deprecated use \OCP\Files\External\Config\IAuthMechanismProvider
  */
-interface IAuthMechanismProvider {
-
-	/**
-	 * @since 9.1.0
-	 * @return AuthMechanism[]
-	 */
-	public function getAuthMechanisms();
-
+interface IAuthMechanismProvider extends \OCP\Files\External\Config\IAuthMechanismProvider {
 }

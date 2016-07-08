@@ -1,8 +1,9 @@
 <?php
 /**
  * @author Robin McCorkell <robin@mccorkell.me.uk>
+ * @author Vincent Petry <pvince81@owncloud.com>
  *
- * @copyright Copyright (c) 2016, ownCloud GmbH.
+ * @copyright Copyright (c) 2016, ownCloud, Inc.
  * @license AGPL-3.0
  *
  * This code is free software: you can redistribute it and/or modify
@@ -19,23 +20,20 @@
  *
  */
 
-namespace OCA\Files_External\Lib;
+namespace OCP\Files\External\Config;
 
-use \OCA\Files_External\Lib\MissingDependency;
+use \OCA\Files_External\Lib\Auth\AuthMechanism;
 
 /**
- * Trait for objects that have dependencies for use
+ * Provider of external storage auth mechanisms
+ * @since 9.2.0
  */
-trait DependencyTrait {
+interface IAuthMechanismProvider {
 
 	/**
-	 * Check if object is valid for use
-	 *
-	 * @return MissingDependency[] Unsatisfied dependencies
+	 * @since 9.1.0
+	 * @return AuthMechanism[]
 	 */
-	public function checkDependencies() {
-		return []; // no dependencies by default
-	}
+	public function getAuthMechanisms();
 
 }
-

@@ -22,6 +22,7 @@
 namespace OCA\Files_External\Lib\Auth;
 
 use \OCP\IL10N;
+use \OCP\Files\External\Auth\AuthMechanism;
 
 /**
  * Builtin authentication mechanism, for legacy backends
