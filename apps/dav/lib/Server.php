@@ -186,28 +186,10 @@ class Server {
 						$this->server->tree, \OC::$server->getTagManager()
 					)
 				);
-				// TODO: switch to LazyUserFolder
-				$userFolder = \OC::$server->getUserFolder();
-				$this->server->addPlugin(new \OCA\DAV\Connector\Sabre\SharesPlugin(
-					$this->server->tree,
-					$userSession,
-					$userFolder,
-					\OC::$server->getShareManager()
-				));
-				$this->server->addPlugin(new \OCA\DAV\Connector\Sabre\CommentPropertiesPlugin(
-					\OC::$server->getCommentsManager(),
-					$userSession
-				));
-				$this->server->addPlugin(new \OCA\DAV\Connector\Sabre\FilesReportPlugin(
-					$this->server->tree,
-					$view,
-					\OC::$server->getSystemTagManager(),
-					\OC::$server->getSystemTagObjectMapper(),
-					\OC::$server->getTagManager(),
-					$userSession,
-					\OC::$server->getGroupManager(),
-					$userFolder
-				));
+
+				//TODO:verify if this is a proper place for the plugin
+				$this->server->addPlugin(
+					new \OCA\DAV\Files\BundlingPlugin($view));
 			}
 			$this->server->addPlugin(new \OCA\DAV\Connector\Sabre\CopyEtagHeaderPlugin());
 		});
