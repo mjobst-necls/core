@@ -24,12 +24,12 @@ namespace OCA\Files_External\Command;
 
 use OC\Core\Command\Base;
 use OC\User\NoUserException;
-use OCA\Files_External\Lib\StorageConfig;
+use OC\Files\External\Lib\StorageConfig;
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\IStoragesBackendService;
-use OCA\Files_External\Service\GlobalStoragesService;
-use OCA\Files_External\Service\ImportLegacyStoragesService;
-use OCA\Files_External\Service\UserStoragesService;
+use OC\Files\External\Service\GlobalStoragesService;
+use OC\Files\External\Service\ImportLegacyStoragesService;
+use OC\Files\External\Service\UserStoragesService;
 use OCP\IUserManager;
 use OCP\IUserSession;
 use Symfony\Component\Console\Input\ArrayInput;

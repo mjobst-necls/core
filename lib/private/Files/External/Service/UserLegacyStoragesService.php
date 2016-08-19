@@ -20,7 +20,7 @@
  *
  */
 
-namespace OCA\Files_External\Service;
+namespace OC\Files\External\Service;
 
 use OCP\IUserSession;
 use OCP\Files\External\IStoragesBackendService;

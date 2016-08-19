@@ -25,17 +25,18 @@
  *
  */
 
-namespace OCA\Files_External\Service;
+namespace OC\Files\External\Service;
 
 use OC\Files\Filesystem;
+use OC\Files\External\StorageConfig;
+
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\Backend\Backend;
 use OCP\Files\External\Auth\AuthMechanism;
 use OCP\Files\Config\IUserMountCache;
 use OCP\Files\StorageNotAvailableException;
 use OCP\Files\External\IStoragesBackendService;
-use OCA\Files_External\Lib\StorageConfig;
-use OCA\Files_External\NotFoundException;
+use OCP\Files\External\NotFoundException;
 
 /**
  * Service class to manage external storages

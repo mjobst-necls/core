@@ -24,8 +24,8 @@ namespace OCA\Files_External\Command;
 
 use OC\Core\Command\Base;
 use OCP\Files\External\IStorageConfig;
-use OCA\Files_External\NotFoundException;
-use OCA\Files_External\Service\GlobalStoragesService;
+use OCP\Files\External\NotFoundException;
+use OC\Files\External\Service\GlobalStoragesService;
 use OCP\IGroupManager;
 use OCP\IUserManager;
 use Symfony\Component\Console\Input\InputArgument;

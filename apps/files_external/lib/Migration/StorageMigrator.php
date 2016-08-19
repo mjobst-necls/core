@@ -24,13 +24,13 @@
 namespace OCA\Files_External\Migration;
 
 use OCP\Files\External\IStoragesBackendService;
-use OCA\Files_External\Service\DBConfigService;
-use OCA\Files_External\Service\GlobalLegacyStoragesService;
-use OCA\Files_External\Service\GlobalStoragesService;
-use OCA\Files_External\Service\LegacyStoragesService;
-use OCA\Files_External\Service\StoragesService;
-use OCA\Files_External\Service\UserLegacyStoragesService;
-use OCA\Files_External\Service\UserStoragesService;
+use OC\Files\External\Service\DBConfigService;
+use OC\Files\External\Service\GlobalLegacyStoragesService;
+use OC\Files\External\Service\GlobalStoragesService;
+use OC\Files\External\Service\LegacyStoragesService;
+use OC\Files\External\Service\StoragesService;
+use OC\Files\External\Service\UserLegacyStoragesService;
+use OC\Files\External\Service\UserStoragesService;
 use OCP\Files\Config\IUserMountCache;
 use OCP\IConfig;
 use OCP\IDBConnection;

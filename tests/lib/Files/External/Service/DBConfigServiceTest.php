@@ -20,10 +20,10 @@
  *
  */
 
-namespace OCA\Files_External\Tests\Service;
+namespace Test\Files\External\Service;
 
 
-use OCA\Files_External\Service\DBConfigService;
+use OC\Files\External\Service\DBConfigService;
 use OCP\IDBConnection;
 use Test\TestCase;
 

@@ -21,7 +21,7 @@
  *
  */
 
-namespace OCA\Files_External\Service;
+namespace OC\Files\External\Service;
 
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;

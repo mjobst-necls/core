@@ -39,6 +39,11 @@ interface IStorageConfig extends \JsonSerializable {
 	const MOUNT_TYPE_ADMIN = 1;
 	const MOUNT_TYPE_PERSONAl = 2;
 
+	const MOUNT_TYPE_GLOBAL = 'global';
+	const MOUNT_TYPE_GROUP = 'group';
+	const MOUNT_TYPE_USER = 'user';
+	const MOUNT_TYPE_PERSONAL = 'personal';
+
 	/**
 	 * Returns the configuration id
 	 *

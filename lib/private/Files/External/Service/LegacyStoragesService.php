@@ -21,7 +21,7 @@
  *
  */
 
-namespace OCA\Files_External\Service;
+namespace OC\Files\External\Service;
 
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\IStoragesBackendService;

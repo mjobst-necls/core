@@ -23,12 +23,12 @@
 namespace OCA\Files_External\Command;
 
 use OC\Core\Command\Base;
-use OCA\Files_External\Lib\Auth\AuthMechanism;
-use OCA\Files_External\Lib\Backend\Backend;
-use OCA\Files_External\Lib\InsufficientDataForMeaningfulAnswerException;
+use OCP\Files\External\Auth\AuthMechanism;
+use OCP\Files\External\Backend\Backend;
+use OCP\Files\External\Lib\InsufficientDataForMeaningfulAnswerException;
 use OCP\Files\External\IStorageConfig;
-use OCA\Files_External\NotFoundException;
-use OCA\Files_External\Service\GlobalStoragesService;
+use OCP\Files\External\NotFoundException;
+use OC\Files\External\Service\GlobalStoragesService;
 use OCP\Files\StorageNotAvailableException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

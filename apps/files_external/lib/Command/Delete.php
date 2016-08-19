@@ -23,9 +23,9 @@
 namespace OCA\Files_External\Command;
 
 use OC\Core\Command\Base;
-use OCA\Files_External\NotFoundException;
-use OCA\Files_External\Service\GlobalStoragesService;
-use OCA\Files_External\Service\UserStoragesService;
+use OCP\Files\External\NotFoundException;
+use OC\Files\External\Service\GlobalStoragesService;
+use OC\Files\External\Service\UserStoragesService;
 use OCP\IUserManager;
 use OCP\IUserSession;
 use Symfony\Component\Console\Input\ArrayInput;

@@ -21,15 +21,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
-namespace OCA\Files_External\Tests\Service;
+namespace Test\Files\External\Service;
 
-use \OC\Files\Filesystem;
+use OC\Files\Filesystem;
 
-use OCA\Files_External\Service\GlobalStoragesService;
-use OCA\Files_External\Service\StoragesService;
-use OCA\Files_External\Service\UserStoragesService;
-use OCA\Files_External\Lib\StorageConfig;
+use OC\Files\External\Service\GlobalStoragesService;
+use OC\Files\External\Service\StoragesService;
+use OC\Files\External\Service\UserStoragesService;
+use OC\Files\External\StorageConfig;
 use Test\Traits\UserTrait;
+use OCP\Files\External\IStorageConfig;
 
 /**
  * @group DB
@@ -101,7 +102,7 @@ class UserStoragesServiceTest extends StoragesServiceTest {
 			current(self::$hookCalls),
 			Filesystem::signal_create_mount,
 			$storage->getMountPoint(),
-			\OC_Mount_Config::MOUNT_TYPE_USER,
+			IStorageConfig::MOUNT_TYPE_USER,
 			$this->userId
 		);
 
@@ -152,7 +153,7 @@ class UserStoragesServiceTest extends StoragesServiceTest {
 			self::$hookCalls[1],
 			Filesystem::signal_delete_mount,
 			'/mountpoint',
-			\OC_Mount_Config::MOUNT_TYPE_USER,
+			IStorageConfig::MOUNT_TYPE_USER,
 			$this->userId
 		);
 	}
@@ -173,20 +174,20 @@ class UserStoragesServiceTest extends StoragesServiceTest {
 			self::$hookCalls[0],
 			Filesystem::signal_delete_mount,
 			'/mountpoint',
-			\OC_Mount_Config::MOUNT_TYPE_USER,
+			IStorageConfig::MOUNT_TYPE_USER,
 			$this->userId
 		);
 		$this->assertHookCall(
 			self::$hookCalls[1],
 			Filesystem::signal_create_mount,
 			'/renamedMountpoint',
-			\OC_Mount_Config::MOUNT_TYPE_USER,
+			IStorageConfig::MOUNT_TYPE_USER,
 			$this->userId
 		);
 	}
 
 	/**
-	 * @expectedException \OCA\Files_External\NotFoundException
+	 * @expectedException \OCP\Files\External\NotFoundException
 	 */
 	public function testGetAdminStorage() {
 		$backend = $this->backendService->getBackend('identifier:\OCA\Files_External\Lib\Backend\SMB');
@@ -201,7 +202,7 @@ class UserStoragesServiceTest extends StoragesServiceTest {
 
 		$newStorage = $this->globalStoragesService->addStorage($storage);
 
-		$this->assertInstanceOf('\OCA\Files_External\Lib\StorageConfig', $this->globalStoragesService->getStorage($newStorage->getId()));
+		$this->assertInstanceOf('\OC\Files\External\StorageConfig', $this->globalStoragesService->getStorage($newStorage->getId()));
 
 		$this->service->getStorage($newStorage->getId());
 	}

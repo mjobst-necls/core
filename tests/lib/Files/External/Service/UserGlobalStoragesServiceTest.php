@@ -21,13 +21,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
-namespace OCA\Files_External\Tests\Service;
+namespace Test\Files\External\Service;
 
-use OCA\Files_External\Lib\StorageConfig;
-use OCA\Files_External\NotFoundException;
-use OCA\Files_External\Service\StoragesService;
-use OCA\Files_External\Service\UserGlobalStoragesService;
+use OC\Files\External\StorageConfig;
+use OC\Files\External\Service\StoragesService;
+use OC\Files\External\Service\UserGlobalStoragesService;
+
+use OCP\Files\External\NotFoundException;
 use OCP\IUser;
+
 use Test\Traits\UserTrait;
 
 /**

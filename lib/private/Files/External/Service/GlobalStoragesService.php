@@ -24,10 +24,11 @@
  *
  */
 
-namespace OCA\Files_External\Service;
+namespace OC\Files\External\Service;
 
 
-use \OC\Files\Filesystem;
+use OC\Files\Filesystem;
+
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\IStoragesBackendService;
 
@@ -51,7 +52,7 @@ class GlobalStoragesService extends StoragesService {
 			$this->triggerApplicableHooks(
 				$signal,
 				$storage->getMountPoint(),
-				\OC_Mount_Config::MOUNT_TYPE_USER,
+				IStorageConfig::MOUNT_TYPE_USER,
 				['all']
 			);
 			return;
@@ -60,13 +61,13 @@ class GlobalStoragesService extends StoragesService {
 		$this->triggerApplicableHooks(
 			$signal,
 			$storage->getMountPoint(),
-			\OC_Mount_Config::MOUNT_TYPE_USER,
+			IStorageConfig::MOUNT_TYPE_USER,
 			$applicableUsers
 		);
 		$this->triggerApplicableHooks(
 			$signal,
 			$storage->getMountPoint(),
-			\OC_Mount_Config::MOUNT_TYPE_GROUP,
+			IStorageConfig::MOUNT_TYPE_GROUP,
 			$applicableGroups
 		);
 	}
@@ -100,7 +101,7 @@ class GlobalStoragesService extends StoragesService {
 			$this->triggerApplicableHooks(
 				Filesystem::signal_delete_mount,
 				$oldStorage->getMountPoint(),
-				\OC_Mount_Config::MOUNT_TYPE_USER,
+				IStorageConfig::MOUNT_TYPE_USER,
 				['all']
 			);
 		}
@@ -109,7 +110,7 @@ class GlobalStoragesService extends StoragesService {
 		$this->triggerApplicableHooks(
 			Filesystem::signal_delete_mount,
 			$oldStorage->getMountPoint(),
-			\OC_Mount_Config::MOUNT_TYPE_USER,
+			IStorageConfig::MOUNT_TYPE_USER,
 			$userDeletions
 		);
 
@@ -117,7 +118,7 @@ class GlobalStoragesService extends StoragesService {
 		$this->triggerApplicableHooks(
 			Filesystem::signal_delete_mount,
 			$oldStorage->getMountPoint(),
-			\OC_Mount_Config::MOUNT_TYPE_GROUP,
+			IStorageConfig::MOUNT_TYPE_GROUP,
 			$groupDeletions
 		);
 
@@ -125,7 +126,7 @@ class GlobalStoragesService extends StoragesService {
 		$this->triggerApplicableHooks(
 			Filesystem::signal_create_mount,
 			$newStorage->getMountPoint(),
-			\OC_Mount_Config::MOUNT_TYPE_USER,
+			IStorageConfig::MOUNT_TYPE_USER,
 			$userAdditions
 		);
 
@@ -133,7 +134,7 @@ class GlobalStoragesService extends StoragesService {
 		$this->triggerApplicableHooks(
 			Filesystem::signal_create_mount,
 			$newStorage->getMountPoint(),
-			\OC_Mount_Config::MOUNT_TYPE_GROUP,
+			IStorageConfig::MOUNT_TYPE_GROUP,
 			$groupAdditions
 		);
 
@@ -145,7 +146,7 @@ class GlobalStoragesService extends StoragesService {
 			$this->triggerApplicableHooks(
 				Filesystem::signal_create_mount,
 				$newStorage->getMountPoint(),
-				\OC_Mount_Config::MOUNT_TYPE_USER,
+				IStorageConfig::MOUNT_TYPE_USER,
 				['all']
 			);
 		}

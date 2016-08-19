@@ -23,16 +23,17 @@
  *
  */
 
-namespace OCA\Files_External\Service;
+namespace OC\Files\External\Service;
+
+use OC\Files\Filesystem;
+use OC\Files\External\Service\UserTrait;
 
 use OCP\Files\Config\IUserMountCache;
 use OCP\IUserSession;
-use OC\Files\Filesystem;
 
 use OCP\Files\External\IStorageConfig;
-use OCA\Files_External\NotFoundException;
+use OCP\Files\External\NotFoundException;
 use OCP\Files\External\IStoragesBackendService;
-use OCA\Files_External\Service\UserTrait;
 
 /**
  * Service class to manage user external storages
@@ -77,7 +78,7 @@ class UserStoragesService extends StoragesService {
 		$this->triggerApplicableHooks(
 			$signal,
 			$storage->getMountPoint(),
-			\OC_Mount_Config::MOUNT_TYPE_USER,
+			IStorageConfig::MOUNT_TYPE_USER,
 			[$user]
 		);
 	}

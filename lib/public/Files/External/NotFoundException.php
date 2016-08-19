@@ -20,10 +20,12 @@
  *
  */
 
-namespace OCA\Files_External;
+namespace OCP\Files\External;
 
 /**
  * Storage is not found
+ *
+ * @since 9.2
  */
 class NotFoundException extends \Exception {
 }
