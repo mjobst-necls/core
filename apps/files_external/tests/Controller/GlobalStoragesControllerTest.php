@@ -30,7 +30,7 @@ use OCP\Files\External\IStoragesBackendService;
 class GlobalStoragesControllerTest extends StoragesControllerTest {
 	public function setUp() {
 		parent::setUp();
-		$this->service = $this->getMockBuilder('\OCA\Files_External\Service\GlobalStoragesService')
+		$this->service = $this->getMockBuilder('\OC\Files\External\Service\GlobalStoragesService')
 			->disableOriginalConstructor()
 			->getMock();
 

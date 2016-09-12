@@ -28,15 +28,15 @@ namespace OCA\Files_External\Controller;
 
 use OCA\Files_External\Lib\Auth\AuthMechanism;
 use OCP\ILogger;
-use \OCP\IUserSession;
-use \OCP\IRequest;
-use \OCP\IL10N;
-use \OCP\AppFramework\Http\DataResponse;
-use \OCP\AppFramework\Http;
-use OCA\Files_External\Service\UserStoragesService;
-use OCA\Files_External\NotFoundException;
+use OCP\IUserSession;
+use OCP\IRequest;
+use OCP\IL10N;
+use OCP\AppFramework\Http\DataResponse;
+use OCP\AppFramework\Http;
+use OC\Files\External\Service\UserStoragesService;
+use OCP\Files\External\NotFoundException;
 use OCP\Files\External\IStorageConfig;
-use \OCA\Files_External\Lib\Backend\Backend;
+use OCP\Files\External\Lib\Backend\Backend;
 
 /**
  * User storages controller

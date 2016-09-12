@@ -28,8 +28,8 @@ use Test\TestCase;
 
 class PersonalMountTest extends TestCase {
 	public function testFindByStorageId() {
-		/** @var \OCA\Files_External\Service\UserStoragesService $storageService */
-		$storageService = $this->getMockBuilder('\OCA\Files_External\Service\UserStoragesService')
+		/** @var \OC\Files\External\Service\UserStoragesService $storageService */
+		$storageService = $this->getMockBuilder('\OC\Files\External\Service\UserStoragesService')
 			->disableOriginalConstructor()
 			->getMock();
 

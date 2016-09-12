@@ -88,6 +88,7 @@ use OC\Files\External\StoragesBackendService;
 use OC\Files\External\Service\UserStoragesService;
 use OC\Files\External\Service\UserGlobalStoragesService;
 use OC\Files\External\Service\GlobalStoragesService;
+use OC\Files\External\Service\DBConfigService;
 
 /**
  * Class Server
@@ -663,17 +664,38 @@ class Server extends ServerContainer implements IServerContainer {
 		$this->registerService('ContentSecurityPolicyManager', function (Server $c) {
 			return new ContentSecurityPolicyManager();
 		});
+		$this->registerService('StoragesDBConfigService', function (Server $c) {
+			return new DBConfigService(
+				$c->getDatabaseConnection(),
+				$c->getCrypto()
+			);
+		});
 		$this->registerService('StoragesBackendService', function (Server $c) {
 			return new StoragesBackendService($c->query('AllConfig'));
 		});
 		$this->registerService('GlobalStoragesService', function (Server $c) {
-			return new GlobalStoragesService($c->query('AllConfig'));
+			return new GlobalStoragesService(
+				$c->query('StoragesBackendService'),
+				$c->query('StoragesDBConfigService'),
+				$c->query('UserMountCache')
+			);
 		});
 		$this->registerService('UserGlobalStoragesService', function (Server $c) {
-			return new UserGlobalStoragesService($c->query('AllConfig'));
+			return new UserGlobalStoragesService(
+				$c->query('StoragesBackendService'),
+				$c->query('StoragesDBConfigService'),
+				$c->query('UserSession'),
+				$c->query('GroupManager'),
+				$c->query('UserMountCache')
+			);
 		});
 		$this->registerService('UserStoragesService', function (Server $c) {
-			return new UserStoragesService($c->query('AllConfig'));
+			return new UserStoragesService(
+				$c->query('StoragesBackendService'),
+				$c->query('StoragesDBConfigService'),
+				$c->query('UserSession'),
+				$c->query('UserMountCache')
+			);
 		});
 		$this->registerService('ShareManager', function(Server $c) {
 			$config = $c->getConfig();

@@ -28,18 +28,18 @@ namespace OCA\Files_External\Controller;
 
 
 use OCP\ILogger;
-use \OCP\IRequest;
-use \OCP\IL10N;
-use \OCP\AppFramework\Http\DataResponse;
-use \OCP\AppFramework\Controller;
-use \OCP\AppFramework\Http;
-use OCA\Files_External\Service\StoragesService;
-use OCA\Files_External\NotFoundException;
+use OCP\IRequest;
+use OCP\IL10N;
+use OCP\AppFramework\Http\DataResponse;
+use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http;
+use OC\Files\External\Service\StoragesService;
+use OCP\Files\External\NotFoundException;
 use OCP\Files\External\IStorageConfig;
-use \OCA\Files_External\Lib\Backend\Backend;
-use \OCA\Files_External\Lib\Auth\AuthMechanism;
-use \OCP\Files\StorageNotAvailableException;
-use \OCA\Files_External\Lib\InsufficientDataForMeaningfulAnswerException;
+use OCP\Files\External\Backend\Backend;
+use OCA\Files_External\Lib\Auth\AuthMechanism;
+use OCP\Files\StorageNotAvailableException;
+use OCA\Files_External\InsufficientDataForMeaningfulAnswerException;
 
 /**
  * Base class for storages controllers

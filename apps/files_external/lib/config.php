@@ -84,8 +84,8 @@ class OC_Mount_Config {
 	public static function getAbsoluteMountPoints($uid) {
 		$mountPoints = [];
 
-		$userGlobalStoragesService = self::$app->getContainer()->query('OCA\Files_External\Service\UserGlobalStoragesService');
-		$userStoragesService = self::$app->getContainer()->query('OCA\Files_External\Service\UserStoragesService');
+		$userGlobalStoragesService = \OC::$server->getUserGlobalStoragesService();
+		$userStoragesService = \OC::$server->getUserStoragesService();
 		$user = self::$app->getContainer()->query('OCP\IUserManager')->get($uid);
 
 		$userGlobalStoragesService->setUser($user);
@@ -125,7 +125,7 @@ class OC_Mount_Config {
 	 */
 	public static function getSystemMountPoints() {
 		$mountPoints = [];
-		$service = self::$app->getContainer()->query('OCA\Files_External\Service\GlobalStoragesService');
+		$service = \OC::$server->getGlobalStoragesService();
 
 		foreach ($service->getStorages() as $storage) {
 			$mountPoints[] = self::prepareMountPointEntry($storage, false);
@@ -143,7 +143,7 @@ class OC_Mount_Config {
 	 */
 	public static function getPersonalMountPoints() {
 		$mountPoints = [];
-		$service = self::$app->getContainer()->query('OCA\Files_External\Service\UserStoragesService');
+		$service = \OC::$server->getUserStoragesService();
 
 		foreach ($service->getStorages() as $storage) {
 			$mountPoints[] = self::prepareMountPointEntry($storage, true);

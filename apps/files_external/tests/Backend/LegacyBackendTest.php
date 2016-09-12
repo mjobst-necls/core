@@ -23,7 +23,7 @@ namespace OCA\Files_External\Tests\Backend;
 
 use \OCA\Files_External\Lib\Backend\LegacyBackend;
 use \OCP\Files\External\DefinitionParameter;
-use \OCA\Files_External\Lib\MissingDependency;
+use \OC\Files\External\MissingDependency;
 
 class LegacyBackendTest extends \Test\TestCase {
 

@@ -25,7 +25,7 @@ namespace OCA\Files_External\Lib;
 
 use OC\Files\Mount\MountPoint;
 use OC\Files\Mount\MoveableMount;
-use OCA\Files_External\Service\UserStoragesService;
+use OC\Files\External\Service\UserStoragesService;
 
 /**
  * Person mount points can be moved by the user

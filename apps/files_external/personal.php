@@ -29,7 +29,7 @@ use \OCP\Files\External\IStoragesBackendService;
 // we must use the same container
 $appContainer = \OC_Mount_Config::$app->getContainer();
 $backendService = \OC::$server->query('StoragesBackendService');
-$userStoragesService = $appContainer->query('OCA\Files_External\Service\UserStoragesService');
+$userStoragesService = \OC::$server->getUserStoragesService();
 
 $tmpl = new OCP\Template('files_external', 'settings');
 $tmpl->assign('encryptionEnabled', \OC::$server->getEncryptionManager()->isEnabled());

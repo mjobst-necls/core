@@ -28,14 +28,14 @@ use OCA\Files_External\Lib\Auth\AuthMechanism;
 use OCP\Files\External\Auth\IUserProvided;
 use OCA\Files_External\Lib\InsufficientDataForMeaningfulAnswerException;
 use OCP\ILogger;
-use \OCP\IRequest;
-use \OCP\IL10N;
-use \OCP\AppFramework\Http\DataResponse;
-use \OCP\AppFramework\Http;
-use OCA\Files_External\Service\UserGlobalStoragesService;
-use OCA\Files_External\NotFoundException;
+use OCP\IRequest;
+use OCP\IL10N;
+use OCP\AppFramework\Http\DataResponse;
+use OCP\AppFramework\Http;
+use OC\Files\External\Service\UserGlobalStoragesService;
+use OCP\Files\External\NotFoundException;
 use OCP\Files\External\IStorageConfig;
-use \OCA\Files_External\Lib\Backend\Backend;
+use OCP\Files\External\Backend\Backend;
 use OCP\IUserSession;
 
 /**

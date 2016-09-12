@@ -31,7 +31,7 @@ use OCP\Files\External\IStoragesBackendService;
 // we must use the same container
 $appContainer = \OC_Mount_Config::$app->getContainer();
 $backendService = \OC::$server->query('StoragesBackendService');
-$globalStoragesService = $appContainer->query('OCA\Files_External\Service\GlobalStoragesService');
+$globalStoragesService = \OC::$server->getGlobalStoragesService();
 
 \OC_Util::addVendorScript('select2/select2');
 \OC_Util::addVendorStyle('select2/select2');

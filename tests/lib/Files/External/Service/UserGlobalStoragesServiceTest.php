@@ -124,7 +124,7 @@ class UserGlobalStoragesServiceTest extends GlobalStoragesServiceTest {
 	 * @dataProvider applicableStorageProvider
 	 */
 	public function testGetStorageWithApplicable($applicableUsers, $applicableGroups, $isVisible) {
-		$backend = $this->backendService->getBackend('identifier:\OCA\Files_External\Lib\Backend\SMB');
+		$backend = $this->backendService->getBackend('identifier:\Test\Files\External\Backend\DummyBackend');
 		$authMechanism = $this->backendService->getAuthMechanism('identifier:\Auth\Mechanism');
 
 		$storage = new StorageConfig();
@@ -159,7 +159,7 @@ class UserGlobalStoragesServiceTest extends GlobalStoragesServiceTest {
 	 * @expectedException \DomainException
 	 */
 	public function testAddStorage($storageParams = null) {
-		$backend = $this->backendService->getBackend('identifier:\OCA\Files_External\Lib\Backend\SMB');
+		$backend = $this->backendService->getBackend('identifier:\Test\Files\External\Backend\DummyBackend');
 		$authMechanism = $this->backendService->getAuthMechanism('identifier:\Auth\Mechanism');
 
 		$storage = new StorageConfig(255);
@@ -175,7 +175,7 @@ class UserGlobalStoragesServiceTest extends GlobalStoragesServiceTest {
 	 * @expectedException \DomainException
 	 */
 	public function testUpdateStorage($storageParams = null) {
-		$backend = $this->backendService->getBackend('identifier:\OCA\Files_External\Lib\Backend\SMB');
+		$backend = $this->backendService->getBackend('identifier:\Test\Files\External\Backend\DummyBackend');
 		$authMechanism = $this->backendService->getAuthMechanism('identifier:\Auth\Mechanism');
 
 		$storage = new StorageConfig(255);
@@ -203,7 +203,7 @@ class UserGlobalStoragesServiceTest extends GlobalStoragesServiceTest {
 	 * @dataProvider deleteStorageDataProvider
 	 */
 	public function testDeleteStorage($backendOptions, $rustyStorageId, $expectedCountAfterDeletion) {
-		$backend = $this->backendService->getBackend('identifier:\OCA\Files_External\Lib\Backend\SMB');
+		$backend = $this->backendService->getBackend('identifier:\Test\Files\External\Backend\DummyBackend');
 		$authMechanism = $this->backendService->getAuthMechanism('identifier:\Auth\Mechanism');
 
 		$storage = new StorageConfig(255);
@@ -261,7 +261,7 @@ class UserGlobalStoragesServiceTest extends GlobalStoragesServiceTest {
 		$priority2, $applicableUsers2, $applicableGroups2,
 		$expectedPrecedence
 	) {
-		$backend = $this->backendService->getBackend('identifier:\OCA\Files_External\Lib\Backend\SMB');
+		$backend = $this->backendService->getBackend('identifier:\Test\Files\External\Backend\DummyBackend');
 		$backend->method('isVisibleFor')
 			->willReturn(true);
 		$authMechanism = $this->backendService->getAuthMechanism('identifier:\Auth\Mechanism');

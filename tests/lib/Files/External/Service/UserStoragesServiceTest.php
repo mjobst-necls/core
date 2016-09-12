@@ -69,7 +69,7 @@ class UserStoragesServiceTest extends StoragesServiceTest {
 	private function makeTestStorageData() {
 		return $this->makeStorageConfig([
 			'mountPoint' => 'mountpoint',
-			'backendIdentifier' => 'identifier:\OCA\Files_External\Lib\Backend\SMB',
+			'backendIdentifier' => 'identifier:\Test\Files\External\Backend\DummyBackend',
 			'authMechanismIdentifier' => 'identifier:\Auth\Mechanism',
 			'backendOptions' => [
 				'option1' => 'value1',
@@ -113,7 +113,7 @@ class UserStoragesServiceTest extends StoragesServiceTest {
 	public function testUpdateStorage() {
 		$storage = $this->makeStorageConfig([
 			'mountPoint' => 'mountpoint',
-			'backendIdentifier' => 'identifier:\OCA\Files_External\Lib\Backend\SMB',
+			'backendIdentifier' => 'identifier:\Test\Files\External\Backend\DummyBackend',
 			'authMechanismIdentifier' => 'identifier:\Auth\Mechanism',
 			'backendOptions' => [
 				'option1' => 'value1',
@@ -190,7 +190,7 @@ class UserStoragesServiceTest extends StoragesServiceTest {
 	 * @expectedException \OCP\Files\External\NotFoundException
 	 */
 	public function testGetAdminStorage() {
-		$backend = $this->backendService->getBackend('identifier:\OCA\Files_External\Lib\Backend\SMB');
+		$backend = $this->backendService->getBackend('identifier:\Test\Files\External\Backend\DummyBackend');
 		$authMechanism = $this->backendService->getAuthMechanism('identifier:\Auth\Mechanism');
 
 		$storage = new StorageConfig();

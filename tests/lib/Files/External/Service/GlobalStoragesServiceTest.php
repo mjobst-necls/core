@@ -44,7 +44,7 @@ class GlobalStoragesServiceTest extends StoragesServiceTest {
 	protected function makeTestStorageData() {
 		return $this->makeStorageConfig([
 			'mountPoint' => 'mountpoint',
-			'backendIdentifier' => 'identifier:\OCA\Files_External\Lib\Backend\SMB',
+			'backendIdentifier' => 'identifier:\Test\Files\External\Backend\DummyBackend',
 			'authMechanismIdentifier' => 'identifier:\Auth\Mechanism',
 			'backendOptions' => [
 				'option1' => 'value1',
@@ -66,7 +66,7 @@ class GlobalStoragesServiceTest extends StoragesServiceTest {
 			[
 				[
 					'mountPoint' => 'mountpoint',
-					'backendIdentifier' => 'identifier:\OCA\Files_External\Lib\Backend\SMB',
+					'backendIdentifier' => 'identifier:\Test\Files\External\Backend\DummyBackend',
 					'authMechanismIdentifier' => 'identifier:\Auth\Mechanism',
 					'backendOptions' => [
 						'option1' => 'value1',
@@ -82,7 +82,7 @@ class GlobalStoragesServiceTest extends StoragesServiceTest {
 			[
 				[
 					'mountPoint' => 'mountpoint',
-					'backendIdentifier' => 'identifier:\OCA\Files_External\Lib\Backend\SMB',
+					'backendIdentifier' => 'identifier:\Test\Files\External\Backend\DummyBackend',
 					'authMechanismIdentifier' => 'identifier:\Auth\Mechanism',
 					'backendOptions' => [
 						'option1' => 'value1',
@@ -98,7 +98,7 @@ class GlobalStoragesServiceTest extends StoragesServiceTest {
 			[
 				[
 					'mountPoint' => 'mountpoint',
-					'backendIdentifier' => 'identifier:\OCA\Files_External\Lib\Backend\SMB',
+					'backendIdentifier' => 'identifier:\Test\Files\External\Backend\DummyBackend',
 					'authMechanismIdentifier' => 'identifier:\Auth\Mechanism',
 					'backendOptions' => [
 						'option1' => 'value1',
@@ -114,7 +114,7 @@ class GlobalStoragesServiceTest extends StoragesServiceTest {
 			[
 				[
 					'mountPoint' => 'mountpoint',
-					'backendIdentifier' => 'identifier:\OCA\Files_External\Lib\Backend\SMB',
+					'backendIdentifier' => 'identifier:\Test\Files\External\Backend\DummyBackend',
 					'authMechanismIdentifier' => 'identifier:\Auth\Mechanism',
 					'backendOptions' => [
 						'option1' => 'value1',
@@ -160,7 +160,7 @@ class GlobalStoragesServiceTest extends StoragesServiceTest {
 		$updatedStorage = $this->makeStorageConfig($updatedStorageParams);
 		$storage = $this->makeStorageConfig([
 			'mountPoint' => 'mountpoint',
-			'backendIdentifier' => 'identifier:\OCA\Files_External\Lib\Backend\SMB',
+			'backendIdentifier' => 'identifier:\Test\Files\External\Backend\DummyBackend',
 			'authMechanismIdentifier' => 'identifier:\Auth\Mechanism',
 			'backendOptions' => [
 				'option1' => 'value1',

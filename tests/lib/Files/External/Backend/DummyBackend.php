@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Robin McCorkell <robin@mccorkell.me.uk>
+ * @author Vincent Petry <pvince81@owncloud.com>
  *
  * @copyright Copyright (c) 2016, ownCloud GmbH.
  * @license AGPL-3.0
@@ -19,31 +19,26 @@
  *
  */
 
-namespace OCA\Files_External\Lib\Backend;
+namespace Test\Files\External\Backend;
 
-use OCP\IL10N;
-use OCP\Files\External\Auth\AuthMechanism;
 use OCP\Files\External\Backend\Backend;
 use OCP\Files\External\DefinitionParameter;
-use OCP\Files\External\IStoragesBackendService;
-use \OCA\Files_External\Lib\Auth\NullMechanism;
+use OCP\Files\External\Auth\AuthMechanism;
 
-class Local extends Backend {
+class DummyBackend extends Backend {
 
-	public function __construct(IL10N $l, NullMechanism $legacyAuth) {
+	public function __construct() {
 		$this
-			->setIdentifier('local')
-			->addIdentifierAlias('\OC\Files\Storage\Local') // legacy compat
-			->setStorageClass('\OC\Files\Storage\Local')
-			->setText($l->t('Local'))
+			->setIdentifier('dummy')
+			->addIdentifierAlias('\Test\Files\External\Backend\DummyBackend') // legacy compat
+			->setStorageClass('\OC\Files\Storage\Temporary')
+			->setText('Dummy')
 			->addParameters([
-				(new DefinitionParameter('datadir', $l->t('Location'))),
+				(new DefinitionParameter('param1', 'Param One')),
+				(new DefinitionParameter('param2', 'Param Two'))
+					->setFlag(DefinitionParameter::FLAG_OPTIONAL),
 			])
-			->setAllowedVisibility(IStoragesBackendService::VISIBILITY_ADMIN)
-			->setPriority(IStoragesBackendService::PRIORITY_DEFAULT + 50)
 			->addAuthScheme(AuthMechanism::SCHEME_NULL)
-			->setLegacyAuthMechanism($legacyAuth)
 		;
 	}
-
 }

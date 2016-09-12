@@ -27,7 +27,7 @@ use OCA\Files_External\Lib\Auth\NullMechanism;
 use OCA\Files_External\Lib\Auth\Password\Password;
 use OCA\Files_External\Lib\Auth\Password\SessionCredentials;
 use OCA\Files_External\Lib\Backend\Local;
-use OCA\Files_External\Lib\StorageConfig;
+use OC\Files\External\StorageConfig;
 use OCP\Files\External\IStorageConfig;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -36,10 +36,10 @@ class ListCommandTest extends CommandTest {
 	 * @return \OCA\Files_External\Command\ListCommand|\PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getInstance() {
-		/** @var \OCA\Files_External\Service\GlobalStoragesService|\PHPUnit_Framework_MockObject_MockObject $globalService */
-		$globalService = $this->createMock('\OCA\Files_External\Service\GlobalStoragesService', null, [], '', false);
-		/** @var \OCA\Files_External\Service\UserStoragesService|\PHPUnit_Framework_MockObject_MockObject $userService */
-		$userService = $this->createMock('\OCA\Files_External\Service\UserStoragesService', null, [], '', false);
+		/** @var \OC\Files\External\Service\GlobalStoragesService|\PHPUnit_Framework_MockObject_MockObject $globalService */
+		$globalService = $this->createMock('\OC\Files\External\Service\GlobalStoragesService', null, [], '', false);
+		/** @var \OC\Files\External\Service\UserStoragesService|\PHPUnit_Framework_MockObject_MockObject $userService */
+		$userService = $this->createMock('\OC\Files\External\Service\UserStoragesService', null, [], '', false);
 		/** @var \OCP\IUserManager|\PHPUnit_Framework_MockObject_MockObject $userManager */
 		$userManager = $this->createMock('\OCP\IUserManager');
 		/** @var \OCP\IUserSession|\PHPUnit_Framework_MockObject_MockObject $userSession */
