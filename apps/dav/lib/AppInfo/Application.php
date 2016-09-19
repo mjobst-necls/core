@@ -41,6 +41,12 @@ class Application extends App {
 	 */
 	public function __construct (array $urlParams= []) {
 		parent::__construct('dav', $urlParams);
+
+		$container = $this->getContainer();
+		/*
+		 * Register capabilities for DAV
+		 */
+		$container->registerCapability('OCA\DAV\Capabilities');
 	}
 
 	/**
