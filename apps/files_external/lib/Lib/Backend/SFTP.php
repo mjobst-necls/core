@@ -26,7 +26,7 @@ use OCP\Files\External\DefinitionParameter;
 use OCP\Files\External\Auth\AuthMechanism;
 use OCP\Files\External\Backend\Backend;
 
-use OCA\Files_External\Lib\Auth\Password\Password;
+use OC\Files\External\Auth\Password\Password;
 
 class SFTP extends Backend {
 

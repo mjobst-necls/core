@@ -21,11 +21,11 @@
 
 namespace OC\Files\External;
 
-use \OCP\IUser;
-use \OCP\Files\Storage;
+use OCP\IUser;
+use OCP\Files\Storage;
 use OCP\Files\External\IStorageConfig;
-use \OCA\Files_External\Lib\InsufficientDataForMeaningfulAnswerException;
-use \OCP\Files\StorageNotAvailableException;
+use OCP\Files\External\InsufficientDataForMeaningfulAnswerException;
+use OCP\Files\StorageNotAvailableException;
 
 /**
  * Trait for objects that can modify IStorageConfigs and wrap Storages

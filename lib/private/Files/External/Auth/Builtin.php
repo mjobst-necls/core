@@ -19,27 +19,23 @@
  *
  */
 
-namespace OCA\Files_External\Lib\Auth\Password;
+namespace OC\Files\External\Auth;
 
-use OCP\IL10N;
-use OCP\Files\External\Auth\AuthMechanism;
-use OCP\Files\External\DefinitionParameter;
+use \OCP\IL10N;
+use \OCP\Files\External\Auth\AuthMechanism;
 
 /**
- * Basic password authentication mechanism
+ * Builtin authentication mechanism, for legacy backends
  */
-class Password extends AuthMechanism {
+class Builtin extends AuthMechanism {
 
-	public function __construct(IL10N $l) {
+	public function __construct() {
+		$l = \OC::$server->getL10N('lib');
 		$this
-			->setIdentifier('password::password')
-			->setScheme(self::SCHEME_PASSWORD)
-			->setText($l->t('Username and password'))
-			->addParameters([
-				(new DefinitionParameter('user', $l->t('Username'))),
-				(new DefinitionParameter('password', $l->t('Password')))
-					->setType(DefinitionParameter::VALUE_PASSWORD),
-			]);
+			->setIdentifier('builtin::builtin')
+			->setScheme(self::SCHEME_BUILTIN)
+			->setText($l->t('Builtin'))
+		;
 	}
 
 }

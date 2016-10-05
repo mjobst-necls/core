@@ -23,7 +23,7 @@ namespace OCA\Files_External\Lib\Backend;
 
 use OCP\Files\External\DefinitionParameter;
 use OCP\Files\External\Backend\Backend;
-use OCA\Files_External\Lib\Auth\Builtin;
+use OC\Files\External\Auth\Builtin;
 use OC\Files\External\MissingDependency;
 use OCA\Files_External\Lib\LegacyDependencyCheckPolyfill;
 

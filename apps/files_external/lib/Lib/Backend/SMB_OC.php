@@ -26,7 +26,7 @@ use OCP\Files\External\DefinitionParameter;
 use OCP\Files\External\Auth\AuthMechanism;
 use OCP\Files\External\Backend\Backend;
 use OCP\Files\External\IStoragesBackendService;
-use OCA\Files_External\Lib\Auth\Password\SessionCredentials;
+use OC\Files\External\Auth\Password\SessionCredentials;
 use OCP\Files\External\IStorageConfig;
 use OCA\Files_External\Lib\LegacyDependencyCheckPolyfill;
 use OCA\Files_External\Lib\Backend\SMB;

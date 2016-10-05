@@ -1,6 +1,5 @@
 <?php
 /**
- * @author Robin Appelman <icewind@owncloud.com>
  * @author Robin McCorkell <robin@mccorkell.me.uk>
  *
  * @copyright Copyright (c) 2016, ownCloud GmbH.
@@ -20,23 +19,25 @@
  *
  */
 
-namespace OCA\Files_External\Lib;
+namespace OC\Files\External;
 
-use \OCP\Files\StorageNotAvailableException;
+use \OCP\Files\Storage;
+use \OC\Files\Storage\Wrapper\PermissionsMask;
+use \OCP\Constants;
 
 /**
- * Authentication mechanism or backend has insufficient data
+ * Wrap Storage in PermissionsMask for session ephemeral use
  */
-class InsufficientDataForMeaningfulAnswerException extends StorageNotAvailableException {
+class SessionStorageWrapper extends PermissionsMask {
+
 	/**
-	 * StorageNotAvailableException constructor.
-	 *
-	 * @param string $message
-	 * @param int $code
-	 * @param \Exception $previous
-	 * @since 6.0.0
+	 * @param array $arguments ['storage' => $storage]
 	 */
-	public function __construct($message = '', $code = self::STATUS_INDETERMINATE, \Exception $previous = null) {
-		parent::__construct($message, $code, $previous);
+	public function __construct($arguments) {
+		// disable sharing permission
+		$arguments['mask'] = Constants::PERMISSION_ALL & ~Constants::PERMISSION_SHARE;
+		parent::__construct($arguments);
 	}
+
 }
+

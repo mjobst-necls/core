@@ -20,7 +20,7 @@
  *
  */
 
-namespace OCA\Files_External\Lib\Auth\Password;
+namespace OC\Files\External\Auth\Password;
 
 use OCP\IUser;
 use OCP\IL10N;
@@ -30,8 +30,9 @@ use OCP\Files\External\IStorageConfig;
 use OCP\ISession;
 use OCP\Security\ICrypto;
 use OCP\Files\Storage;
-use OCA\Files_External\Lib\SessionStorageWrapper;
-use OCA\Files_External\Lib\InsufficientDataForMeaningfulAnswerException;
+use OC\Files\External\SessionStorageWrapper;
+use OCP\Files\External\InsufficientDataForMeaningfulAnswerException;
+use OCP\IUserSession;
 
 /**
  * Username and password from login credentials, saved in session
@@ -44,8 +45,9 @@ class SessionCredentials extends AuthMechanism {
 	/** @var ICrypto */
 	protected $crypto;
 
-	public function __construct(IL10N $l, ISession $session, ICrypto $crypto) {
-		$this->session = $session;
+	public function __construct(IUserSession $userSession, ICrypto $crypto) {
+		$l = \OC::$server->getL10N('lib');
+		$this->session = $userSession->getSession();
 		$this->crypto = $crypto;
 
 		$this
@@ -56,6 +58,7 @@ class SessionCredentials extends AuthMechanism {
 			])
 		;
 
+		// FIXME: use password from DB
 		\OCP\Util::connectHook('OC_User', 'post_login', $this, 'authenticate');
 	}
 

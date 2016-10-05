@@ -28,7 +28,7 @@ use OCP\Files\External\Backend\Backend;
 use OCP\Files\External\IStorageConfig;
 use OCA\Files_External\Lib\LegacyDependencyCheckPolyfill;
 
-use OCA\Files_External\Lib\Auth\Password\Password;
+use OC\Files\External\Auth\Password\Password;
 use OCP\IUser;
 
 class SMB extends Backend {

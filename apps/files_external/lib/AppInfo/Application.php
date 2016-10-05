@@ -106,16 +106,6 @@ class Application extends App implements IBackendProvider, IAuthMechanismProvide
 		$container = $this->getContainer();
 
 		return [
-			// AuthMechanism::SCHEME_NULL mechanism
-			$container->query('OCA\Files_External\Lib\Auth\NullMechanism'),
-
-			// AuthMechanism::SCHEME_BUILTIN mechanism
-			$container->query('OCA\Files_External\Lib\Auth\Builtin'),
-
-			// AuthMechanism::SCHEME_PASSWORD mechanisms
-			$container->query('OCA\Files_External\Lib\Auth\Password\Password'),
-			$container->query('OCA\Files_External\Lib\Auth\Password\SessionCredentials'),
-
 			// AuthMechanism::SCHEME_OAUTH1 mechanisms
 			$container->query('OCA\Files_External\Lib\Auth\OAuth1\OAuth1'),
 

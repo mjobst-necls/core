@@ -37,9 +37,9 @@ use OC\Files\External\Service\StoragesService;
 use OCP\Files\External\NotFoundException;
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\Backend\Backend;
-use OCA\Files_External\Lib\Auth\AuthMechanism;
+use OCP\Files\External\Auth\AuthMechanism;
 use OCP\Files\StorageNotAvailableException;
-use OCA\Files_External\InsufficientDataForMeaningfulAnswerException;
+use OCP\Files\External\InsufficientDataForMeaningfulAnswerException;
 
 /**
  * Base class for storages controllers

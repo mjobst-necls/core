@@ -25,7 +25,7 @@ namespace OCA\Files_External\Command;
 use OC\Core\Command\Base;
 use OCP\Files\External\Auth\AuthMechanism;
 use OCP\Files\External\Backend\Backend;
-use OCA\Files_External\Lib\InsufficientDataForMeaningfulAnswerException;
+use OCP\Files\External\InsufficientDataForMeaningfulAnswerException;
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\NotFoundException;
 use OC\Files\External\Service\GlobalStoragesService;

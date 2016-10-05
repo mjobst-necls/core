@@ -19,21 +19,23 @@
  *
  */
 
-namespace OCA\Files_External\Lib\Auth;
+namespace OC\Files\External\Auth;
 
 use \OCP\IL10N;
+
 use \OCP\Files\External\Auth\AuthMechanism;
 
 /**
- * Builtin authentication mechanism, for legacy backends
+ * Null authentication mechanism
  */
-class Builtin extends AuthMechanism {
+class NullMechanism extends AuthMechanism {
 
-	public function __construct(IL10N $l) {
+	public function __construct() {
+		$l = \OC::$server->getL10N('lib');
 		$this
-			->setIdentifier('builtin::builtin')
-			->setScheme(self::SCHEME_BUILTIN)
-			->setText($l->t('Builtin'))
+			->setIdentifier('null::null')
+			->setScheme(self::SCHEME_NULL)
+			->setText($l->t('None'))
 		;
 	}
 

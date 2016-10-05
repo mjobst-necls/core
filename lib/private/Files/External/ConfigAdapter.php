@@ -23,14 +23,12 @@
  *
  */
 
-namespace OCA\Files_External\Config;
+namespace OC\Files\External;
 
 use OC\Files\Storage\Wrapper\Availability;
-use OCA\Files_External\Migration\StorageMigrator;
 use OCP\Files\Storage;
 use OC\Files\Mount\MountPoint;
 use OCP\Files\Storage\IStorageFactory;
-use OCA\Files_External\Lib\PersonalMount;
 use OCP\Files\Config\IMountProvider;
 use OCP\IUser;
 use OC\Files\External\Service\UserStoragesService;
@@ -49,22 +47,17 @@ class ConfigAdapter implements IMountProvider {
 
 	/** @var UserGlobalStoragesService */
 	private $userGlobalStoragesService;
-	/** @var StorageMigrator  */
-	private $migrator;
 
 	/**
 	 * @param UserStoragesService $userStoragesService
 	 * @param UserGlobalStoragesService $userGlobalStoragesService
-	 * @param StorageMigrator $migrator
 	 */
 	public function __construct(
 		UserStoragesService $userStoragesService,
-		UserGlobalStoragesService $userGlobalStoragesService,
-		StorageMigrator $migrator
+		UserGlobalStoragesService $userGlobalStoragesService
 	) {
 		$this->userStoragesService = $userStoragesService;
 		$this->userGlobalStoragesService = $userGlobalStoragesService;
-		$this->migrator = $migrator;
 	}
 
 	/**
@@ -75,7 +68,7 @@ class ConfigAdapter implements IMountProvider {
 	 */
 	private function prepareStorageConfig(IStorageConfig &$storage, IUser $user) {
 		foreach ($storage->getBackendOptions() as $option => $value) {
-			$storage->setBackendOption($option, \OC_Mount_Config::setUserVars(
+			$storage->setBackendOption($option, $this->setUserVars(
 				$user->getUID(), $value
 			));
 		}
@@ -118,8 +111,6 @@ class ConfigAdapter implements IMountProvider {
 	 * @return \OCP\Files\Mount\IMountPoint[]
 	 */
 	public function getMountsForUser(IUser $user, IStorageFactory $loader) {
-		$this->migrator->migrateUser($user);
-
 		$mounts = [];
 
 		$this->userStoragesService->setUser($user);
@@ -181,5 +172,27 @@ class ConfigAdapter implements IMountProvider {
 		$this->userGlobalStoragesService->resetUser();
 
 		return $mounts;
+	}
+
+	/**
+	 * fill in the correct values for $user
+	 *
+	 * @param string $user user value
+	 * @param string|array $input
+	 * @return string
+	 */
+	private function setUserVars($user, $input) {
+		if (is_array($input)) {
+			foreach ($input as $key => $value) {
+				if (is_string($value)) {
+					$input[$key] = str_replace('$user', $user, $value);
+				}
+			}
+		} else {
+			if (is_string($input)) {
+				$input = str_replace('$user', $user, $input);
+			}
+		}
+		return $input;
 	}
 }

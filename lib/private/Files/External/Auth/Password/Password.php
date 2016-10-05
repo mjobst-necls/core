@@ -19,23 +19,28 @@
  *
  */
 
-namespace OCA\Files_External\Lib\Auth;
+namespace OC\Files\External\Auth\Password;
 
-use \OCP\IL10N;
-
-use \OCP\Files\External\Auth\AuthMechanism;
+use OCP\IL10N;
+use OCP\Files\External\Auth\AuthMechanism;
+use OCP\Files\External\DefinitionParameter;
 
 /**
- * Null authentication mechanism
+ * Basic password authentication mechanism
  */
-class NullMechanism extends AuthMechanism {
+class Password extends AuthMechanism {
 
-	public function __construct(IL10N $l) {
+	public function __construct() {
+		$l = \OC::$server->getL10N('lib');
 		$this
-			->setIdentifier('null::null')
-			->setScheme(self::SCHEME_NULL)
-			->setText($l->t('None'))
-		;
+			->setIdentifier('password::password')
+			->setScheme(self::SCHEME_PASSWORD)
+			->setText($l->t('Username and password'))
+			->addParameters([
+				(new DefinitionParameter('user', $l->t('Username'))),
+				(new DefinitionParameter('password', $l->t('Password')))
+					->setType(DefinitionParameter::VALUE_PASSWORD),
+			]);
 	}
 
 }

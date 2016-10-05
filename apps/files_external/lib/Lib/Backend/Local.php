@@ -26,7 +26,7 @@ use OCP\Files\External\Auth\AuthMechanism;
 use OCP\Files\External\Backend\Backend;
 use OCP\Files\External\DefinitionParameter;
 use OCP\Files\External\IStoragesBackendService;
-use \OCA\Files_External\Lib\Auth\NullMechanism;
+use OC\Files\External\Auth\NullMechanism;
 
 class Local extends Backend {
 
