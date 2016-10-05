@@ -87,7 +87,7 @@ abstract class StoragesServiceTest extends TestCase {
 		$authMechanisms = [
 			'identifier:\Auth\Mechanism' => $this->getAuthMechMock('null', '\Auth\Mechanism'),
 			'identifier:\Other\Auth\Mechanism' => $this->getAuthMechMock('null', '\Other\Auth\Mechanism'),
-			'identifier:\OCA\Files_External\Lib\Auth\NullMechanism' => $this->getAuthMechMock(),
+			'identifier:\OC\Files\External\Auth\NullMechanism' => $this->getAuthMechMock(),
 		];
 		$this->backendService->method('getAuthMechanism')
 			->will($this->returnCallback(function ($class) use ($authMechanisms) {
@@ -106,7 +106,7 @@ abstract class StoragesServiceTest extends TestCase {
 			->will($this->returnValue($authMechanisms));
 
 		$sftpBackend = $this->getBackendMock('\OCA\Files_External\Lib\Backend\SFTP', '\OCA\Files_External\Lib\Storage\SFTP');
-		$dummyBackend = $this->getBackendMock('\Test\Files\External\Backend\DummyBackend', '\OC\Files\Storage\Temporary');
+		$dummyBackend = $this->getBackendMock('\Test\Files\External\Backend\DummyBackend', '\Test\Files\External\Backend\DummyStorage');
 		$backends = [
 			'identifier:\OCA\Files_External\Lib\Backend\SMB' => $this->getBackendMock('\OCA\Files_External\Lib\Backend\SMB', '\OCA\Files_External\Lib\Storage\SMB'),
 			'identifier:\OCA\Files_External\Lib\Backend\SFTP' => $sftpBackend,
@@ -158,10 +158,12 @@ abstract class StoragesServiceTest extends TestCase {
 			->willReturn($storageClass);
 		$backend->method('getIdentifier')
 			->willReturn('identifier:' . $class);
+		$backend->method('wrapStorage')
+			->will($this->returnArgument(0));
 		return $backend;
 	}
 
-	protected function getAuthMechMock($scheme = 'null', $class = '\OCA\Files_External\Lib\Auth\NullMechanism') {
+	protected function getAuthMechMock($scheme = 'null', $class = '\OC\Files\External\Auth\NullMechanism') {
 		$authMech = $this->getMockBuilder('\OCP\Files\External\Auth\AuthMechanism')
 			->disableOriginalConstructor()
 			->getMock();
@@ -169,6 +171,8 @@ abstract class StoragesServiceTest extends TestCase {
 			->willReturn($scheme);
 		$authMech->method('getIdentifier')
 			->willReturn('identifier:' . $class);
+		$authMech->method('wrapStorage')
+			->will($this->returnArgument(0));
 
 		return $authMech;
 	}
@@ -243,7 +247,7 @@ abstract class StoragesServiceTest extends TestCase {
 					'password' => 'testPassword',
 					'root' => 'someroot',
 				],
-				'smb::test@example.com//share//someroot/',
+				'smb::test@example.com/share/someroot',
 				0
 			],
 			// special case with $user vars, cannot auto-remove the oc_storages entry
@@ -255,7 +259,7 @@ abstract class StoragesServiceTest extends TestCase {
 					'password' => 'testPassword',
 					'root' => 'someroot',
 				],
-				'smb::someone@example.com//share//someroot/',
+				'smb::someone@example.com/share/someroot',
 				1
 			],
 		];

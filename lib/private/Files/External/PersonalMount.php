@@ -21,7 +21,7 @@
  *
  */
 
-namespace OC\Files\External\Lib;
+namespace OC\Files\External;
 
 use OC\Files\Mount\MountPoint;
 use OC\Files\Mount\MoveableMount;

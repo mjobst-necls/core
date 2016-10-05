@@ -23,9 +23,9 @@
 namespace OCA\Files_External\Tests\Command;
 
 use OCA\Files_External\Command\ListCommand;
-use OCA\Files_External\Lib\Auth\NullMechanism;
-use OCA\Files_External\Lib\Auth\Password\Password;
-use OCA\Files_External\Lib\Auth\Password\SessionCredentials;
+use OC\Files\External\Auth\NullMechanism;
+use OC\Files\External\Auth\Password\Password;
+use OC\Files\External\Auth\Password\SessionCredentials;
 use OCA\Files_External\Lib\Backend\Local;
 use OC\Files\External\StorageConfig;
 use OCP\Files\External\IStorageConfig;
@@ -51,6 +51,10 @@ class ListCommandTest extends CommandTest {
 	public function testListAuthIdentifier() {
 		$l10n = $this->createMock('\OC_L10N', null, [], '', false);
 		$session = $this->createMock('\OCP\ISession');
+		$userSession = $this->createMock('\OCP\IUserSession');
+		$userSession->expects($this->once())
+			->method('getSession')
+			->willReturn($session);
 		$crypto = $this->createMock('\OCP\Security\ICrypto');
 		$instance = $this->getInstance();
 		// FIXME: use mock of IStorageConfig
@@ -58,7 +62,7 @@ class ListCommandTest extends CommandTest {
 		$mount1->setAuthMechanism(new Password($l10n));
 		$mount1->setBackend(new Local($l10n, new NullMechanism($l10n)));
 		$mount2 = new StorageConfig();
-		$mount2->setAuthMechanism(new SessionCredentials($l10n, $session, $crypto));
+		$mount2->setAuthMechanism(new SessionCredentials($l10n, $userSession, $crypto));
 		$mount2->setBackend(new Local($l10n, new NullMechanism($l10n)));
 		$input = $this->getInput($instance, [], [
 			'output' => 'json'

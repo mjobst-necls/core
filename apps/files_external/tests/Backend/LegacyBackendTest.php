@@ -37,7 +37,7 @@ class LegacyBackendTest extends \Test\TestCase {
 	}
 
 	public function testConstructor() {
-		$auth = $this->getMockBuilder('\OCA\Files_External\Lib\Auth\Builtin')
+		$auth = $this->getMockBuilder('\OC\Files\External\Auth\Builtin')
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -93,7 +93,7 @@ class LegacyBackendTest extends \Test\TestCase {
 	}
 
 	public function testNoDependencies() {
-		$auth = $this->getMockBuilder('\OCA\Files_External\Lib\Auth\Builtin')
+		$auth = $this->getMockBuilder('\OC\Files\External\Auth\Builtin')
 			->disableOriginalConstructor()
 			->getMock();
 

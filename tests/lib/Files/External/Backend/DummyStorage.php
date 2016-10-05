@@ -21,24 +21,17 @@
 
 namespace Test\Files\External\Backend;
 
-use OCP\Files\External\Backend\Backend;
-use OCP\Files\External\DefinitionParameter;
-use OCP\Files\External\Auth\AuthMechanism;
+use OC\Files\Storage\Temporary;
 
-class DummyBackend extends Backend {
+class DummyStorage extends Temporary {
+	private $args;
 
-	public function __construct() {
-		$this
-			->setIdentifier('dummy')
-			->addIdentifierAlias('\Test\Files\External\Backend\DummyBackend') // legacy compat
-			->setStorageClass('\Test\Files\External\Backend\DummyStorage')
-			->setText('Dummy')
-			->addParameters([
-				(new DefinitionParameter('param1', 'Param One')),
-				(new DefinitionParameter('param2', 'Param Two'))
-					->setFlag(DefinitionParameter::FLAG_OPTIONAL),
-			])
-			->addAuthScheme(AuthMechanism::SCHEME_NULL)
-		;
+	public function __construct($arguments = null) {
+		parent::__construct(['datadir' => \OC::$server->getTempManager()->getTemporaryFolder()]);
+		$this->args = $arguments;
+	}
+
+	public function getId() {
+		return 'smb::' . $this->args['user'] . '@' . $this->args['host'] . '/' . $this->args['share'] . '/' . $this->args['root'];
 	}
 }

@@ -20,10 +20,10 @@
  *
  */
 
-namespace OCA\Files_External\Tests;
+namespace Test\Files\External;
 
 use OC\Files\Mount\Manager;
-use OCA\Files_External\Lib\PersonalMount;
+use OC\Files\External\PersonalMount;
 use Test\TestCase;
 
 class PersonalMountTest extends TestCase {
