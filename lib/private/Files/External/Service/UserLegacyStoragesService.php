@@ -24,6 +24,7 @@ namespace OC\Files\External\Service;
 
 use OCP\IUserSession;
 use OCP\Files\External\IStoragesBackendService;
+use OC\Files\External\LegacyUtil;
 
 /**
  * Read user defined mounts from the legacy mount.json
@@ -51,6 +52,7 @@ class UserLegacyStoragesService extends LegacyStoragesService {
 	protected function readLegacyConfig() {
 		// read user config
 		$user = $this->userSession->getUser()->getUID();
-		return \OC_Mount_Config::readData($user);
+		return LegacyUtil::readData($user);
 	}
+
 }

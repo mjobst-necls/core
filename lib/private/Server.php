@@ -696,7 +696,11 @@ class Server extends ServerContainer implements IServerContainer {
 
 			// force-load the session one as it will register hooks...
 			// TODO: obsolete it and use the TokenProvider to get the user's password from the session
-			$service->registerAuthMechanism($c->query('OC\Files\External\Auth\Password\SessionCredentials'));
+			$sessionCreds = new \OC\Files\External\Auth\Password\SessionCredentials(
+				$c->getSession(),
+				$c->getCrypto()
+			);
+			$service->registerAuthMechanism($sessionCreds);
 
 			return $service;
 		});

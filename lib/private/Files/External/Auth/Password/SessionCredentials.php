@@ -32,7 +32,6 @@ use OCP\Security\ICrypto;
 use OCP\Files\Storage;
 use OC\Files\External\SessionStorageWrapper;
 use OCP\Files\External\InsufficientDataForMeaningfulAnswerException;
-use OCP\IUserSession;
 
 /**
  * Username and password from login credentials, saved in session
@@ -45,9 +44,9 @@ class SessionCredentials extends AuthMechanism {
 	/** @var ICrypto */
 	protected $crypto;
 
-	public function __construct(IUserSession $userSession, ICrypto $crypto) {
+	public function __construct(ISession $session, ICrypto $crypto) {
 		$l = \OC::$server->getL10N('lib');
-		$this->session = $userSession->getSession();
+		$this->session = $session;
 		$this->crypto = $crypto;
 
 		$this

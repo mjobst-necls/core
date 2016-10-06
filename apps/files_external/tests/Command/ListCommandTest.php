@@ -51,19 +51,15 @@ class ListCommandTest extends CommandTest {
 	public function testListAuthIdentifier() {
 		$l10n = $this->createMock('\OC_L10N', null, [], '', false);
 		$session = $this->createMock('\OCP\ISession');
-		$userSession = $this->createMock('\OCP\IUserSession');
-		$userSession->expects($this->once())
-			->method('getSession')
-			->willReturn($session);
 		$crypto = $this->createMock('\OCP\Security\ICrypto');
 		$instance = $this->getInstance();
 		// FIXME: use mock of IStorageConfig
 		$mount1 = new StorageConfig();
-		$mount1->setAuthMechanism(new Password($l10n));
-		$mount1->setBackend(new Local($l10n, new NullMechanism($l10n)));
+		$mount1->setAuthMechanism(new Password());
+		$mount1->setBackend(new Local($l10n, new NullMechanism()));
 		$mount2 = new StorageConfig();
-		$mount2->setAuthMechanism(new SessionCredentials($l10n, $userSession, $crypto));
-		$mount2->setBackend(new Local($l10n, new NullMechanism($l10n)));
+		$mount2->setAuthMechanism(new SessionCredentials($session, $crypto));
+		$mount2->setBackend(new Local($l10n, new NullMechanism()));
 		$input = $this->getInput($instance, [], [
 			'output' => 'json'
 		]);

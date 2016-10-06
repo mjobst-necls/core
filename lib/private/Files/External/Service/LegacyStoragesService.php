@@ -25,6 +25,7 @@ namespace OC\Files\External\Service;
 
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\IStoragesBackendService;
+use OC\Files\External\LegacyUtil;
 
 /**
  * Read mount config from legacy mount.json
@@ -79,13 +80,13 @@ abstract class LegacyStoragesService {
 			$storageOptions['priority'] = $backend->getPriority();
 		}
 		$storageConfig->setPriority($storageOptions['priority']);
-		if ($mountType === \OC_Mount_Config::MOUNT_TYPE_USER) {
+		if ($mountType === IStorageConfig::MOUNT_TYPE_USER) {
 			$applicableUsers = $storageConfig->getApplicableUsers();
 			if ($applicable !== 'all') {
 				$applicableUsers[] = $applicable;
 				$storageConfig->setApplicableUsers($applicableUsers);
 			}
-		} else if ($mountType === \OC_Mount_Config::MOUNT_TYPE_GROUP) {
+		} else if ($mountType === IStorageConfig::MOUNT_TYPE_GROUP) {
 			$applicableGroups = $storageConfig->getApplicableGroups();
 			$applicableGroups[] = $applicable;
 			$storageConfig->setApplicableGroups($applicableGroups);
@@ -150,7 +151,7 @@ abstract class LegacyStoragesService {
 					$relativeMountPath = rtrim($parts[2], '/');
 					// note: we cannot do this after the loop because the decrypted config
 					// options might be needed for the config hash
-					$storageOptions['options'] = \OC_Mount_Config::decryptPasswords($storageOptions['options']);
+					$storageOptions['options'] = LegacyUtil::decryptPasswords($storageOptions['options']);
 					if (!isset($storageOptions['backend'])) {
 						$storageOptions['backend'] = $storageOptions['class']; // legacy compat
 					}
@@ -168,7 +169,7 @@ abstract class LegacyStoragesService {
 						// but at this point we don't know the max-id, so use
 						// first group it by config hash
 						$storageOptions['mountpoint'] = $rootMountPath;
-						$configId = \OC_Mount_Config::makeConfigHash($storageOptions);
+						$configId = $this->makeConfigHash($storageOptions);
 						if (isset($storagesWithConfigHash[$configId])) {
 							$currentStorage = $storagesWithConfigHash[$configId];
 						}
@@ -208,5 +209,27 @@ abstract class LegacyStoragesService {
 			$storage->getAuthMechanism()->validateStorageDefinition($storage);
 		}
 		return $storages;
+	}
+
+	/**
+	 * Computes a hash based on the given configuration.
+	 * This is mostly used to find out whether configurations
+	 * are the same.
+	 *
+	 * @param array $config
+	 * @return string
+	 */
+	private function makeConfigHash($config) {
+		$data = json_encode(
+			[
+				'c' => $config['backend'],
+				'a' => $config['authMechanism'],
+				'm' => $config['mountpoint'],
+				'o' => $config['options'],
+				'p' => isset($config['priority']) ? $config['priority'] : -1,
+				'mo' => isset($config['mountOptions']) ? $config['mountOptions'] : [],
+			]
+		);
+		return hash('md5', $data);
 	}
 }
