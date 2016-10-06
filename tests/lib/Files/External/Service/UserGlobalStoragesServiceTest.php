@@ -26,6 +26,8 @@ namespace Test\Files\External\Service;
 use OC\Files\External\StorageConfig;
 use OC\Files\External\Service\StoragesService;
 use OC\Files\External\Service\UserGlobalStoragesService;
+use OCP\Files\External\Service\IStoragesService;
+use OCP\Files\External\Service\IUserGlobalStoragesService;
 
 use OCP\Files\External\NotFoundException;
 use OCP\IUser;
@@ -42,12 +44,12 @@ class UserGlobalStoragesServiceTest extends GlobalStoragesServiceTest {
 	protected $groupManager;
 
 	/**
-	 * @var StoragesService
+	 * @var IStoragesService
 	 */
 	protected $globalStoragesService;
 
 	/**
-	 * @var UserGlobalStoragesService
+	 * @var IUserGlobalStoragesService
 	 */
 	protected $service;
 

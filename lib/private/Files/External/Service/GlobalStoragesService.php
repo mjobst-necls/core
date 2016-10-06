@@ -31,11 +31,12 @@ use OC\Files\Filesystem;
 
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\IStoragesBackendService;
+use OCP\Files\External\Service\IGlobalStoragesService;
 
 /**
  * Service class to manage global external storages
  */
-class GlobalStoragesService extends StoragesService {
+class GlobalStoragesService extends StoragesService implements IGlobalStoragesService {
 	/**
 	 * Triggers $signal for all applicable users of the given
 	 * storage

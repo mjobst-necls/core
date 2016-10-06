@@ -25,8 +25,8 @@ namespace OCA\Files_External\Command;
 use OC\Core\Command\Base;
 use OC\User\NoUserException;
 use OCP\Files\External\IStorageConfig;
-use OC\Files\External\Service\GlobalStoragesService;
-use OC\Files\External\Service\UserStoragesService;
+use OCP\Files\External\Service\IGlobalStoragesService;
+use OCP\Files\External\Service\IUserStoragesService;
 use OCP\IUserManager;
 use OCP\IUserSession;
 use Symfony\Component\Console\Helper\Table;
@@ -37,12 +37,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ListCommand extends Base {
 	/**
-	 * @var GlobalStoragesService
+	 * @var IGlobalStoragesService
 	 */
 	protected $globalService;
 
 	/**
-	 * @var UserStoragesService
+	 * @var IUserStoragesService
 	 */
 	protected $userService;
 
@@ -58,7 +58,7 @@ class ListCommand extends Base {
 
 	const ALL = -1;
 
-	function __construct(GlobalStoragesService $globalService, UserStoragesService $userService, IUserSession $userSession, IUserManager $userManager) {
+	function __construct(IGlobalStoragesService $globalService, IUserStoragesService $userService, IUserSession $userSession, IUserManager $userManager) {
 		parent::__construct();
 		$this->globalService = $globalService;
 		$this->userService = $userService;

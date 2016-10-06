@@ -36,10 +36,10 @@ class ListCommandTest extends CommandTest {
 	 * @return \OCA\Files_External\Command\ListCommand|\PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getInstance() {
-		/** @var \OC\Files\External\Service\GlobalStoragesService|\PHPUnit_Framework_MockObject_MockObject $globalService */
-		$globalService = $this->createMock('\OC\Files\External\Service\GlobalStoragesService', null, [], '', false);
-		/** @var \OC\Files\External\Service\UserStoragesService|\PHPUnit_Framework_MockObject_MockObject $userService */
-		$userService = $this->createMock('\OC\Files\External\Service\UserStoragesService', null, [], '', false);
+		/** @var \OCP\Files\External\Service\IGlobalStoragesService|\PHPUnit_Framework_MockObject_MockObject $globalService */
+		$globalService = $this->createMock('\OCP\Files\External\Service\IGlobalStoragesService');
+		/** @var \OC\Files\External\Service\IUserStoragesService|\PHPUnit_Framework_MockObject_MockObject $userService */
+		$userService = $this->createMock('\OCP\Files\External\Service\IUserStoragesService');
 		/** @var \OCP\IUserManager|\PHPUnit_Framework_MockObject_MockObject $userManager */
 		$userManager = $this->createMock('\OCP\IUserManager');
 		/** @var \OCP\IUserSession|\PHPUnit_Framework_MockObject_MockObject $userSession */

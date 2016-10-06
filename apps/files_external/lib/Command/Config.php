@@ -25,7 +25,7 @@ namespace OCA\Files_External\Command;
 use OC\Core\Command\Base;
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\NotFoundException;
-use OC\Files\External\Service\GlobalStoragesService;
+use OCP\Files\External\Service\IGlobalStoragesService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableHelper;
@@ -36,11 +36,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Config extends Base {
 	/**
-	 * @var GlobalStoragesService
+	 * @var IGlobalStoragesService
 	 */
 	protected $globalService;
 
-	function __construct(GlobalStoragesService $globalService) {
+	function __construct(IGlobalStoragesService $globalService) {
 		parent::__construct();
 		$this->globalService = $globalService;
 	}

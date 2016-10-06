@@ -33,7 +33,7 @@ use OCP\IRequest;
 use OCP\IL10N;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http;
-use OC\Files\External\Service\UserStoragesService;
+use OCP\Files\External\Service\IUserStoragesService;
 use OCP\Files\External\NotFoundException;
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\Lib\Backend\Backend;
@@ -53,7 +53,7 @@ class UserStoragesController extends StoragesController {
 	 * @param string $AppName application name
 	 * @param IRequest $request request object
 	 * @param IL10N $l10n l10n service
-	 * @param UserStoragesService $userStoragesService storage service
+	 * @param IUserStoragesService $userStoragesService storage service
 	 * @param IUserSession $userSession
 	 * @param ILogger $logger
 	 */
@@ -61,7 +61,7 @@ class UserStoragesController extends StoragesController {
 		$AppName,
 		IRequest $request,
 		IL10N $l10n,
-		UserStoragesService $userStoragesService,
+		IUserStoragesService $userStoragesService,
 		IUserSession $userSession,
 		ILogger $logger
 	) {

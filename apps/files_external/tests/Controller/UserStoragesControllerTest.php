@@ -37,9 +37,7 @@ class UserStoragesControllerTest extends StoragesControllerTest {
 
 	public function setUp() {
 		parent::setUp();
-		$this->service = $this->getMockBuilder('\OC\Files\External\Service\UserStoragesService')
-			->disableOriginalConstructor()
-			->getMock();
+		$this->service = $this->createMock('\OCP\Files\External\Service\IUserStoragesService');
 
 		$this->service->method('getVisibilityType')
 			->willReturn(IStoragesBackendService::VISIBILITY_PERSONAL);

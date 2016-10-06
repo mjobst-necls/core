@@ -50,6 +50,15 @@ class Application extends App implements IBackendProvider, IAuthMechanismProvide
 		$container->registerService('OCP\Files\External\IStoragesBackendService', function (IAppContainer $c) {
 			return $c->getServer()->query('StoragesBackendService');
 		});
+		$container->registerService('OCP\Files\External\Service\IGlobalStoragesService', function (IAppContainer $c) {
+			return $c->getServer()->query('OCP\Files\External\Service\IGlobalStoragesService');
+		});
+		$container->registerService('OCP\Files\External\Service\IUserGlobalStoragesService', function (IAppContainer $c) {
+			return $c->getServer()->query('OCP\Files\External\Service\IUserGlobalStoragesService');
+		});
+		$container->registerService('OCP\Files\External\Service\IUserStoragesService', function (IAppContainer $c) {
+			return $c->getServer()->query('OCP\Files\External\Service\IUserStoragesService');
+		});
 
 		$backendService = $container->getServer()->query('StoragesBackendService');
 		$backendService->registerBackendProvider($this);

@@ -28,7 +28,7 @@ use OCP\Files\External\Backend\Backend;
 use OCP\Files\External\InsufficientDataForMeaningfulAnswerException;
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\NotFoundException;
-use OC\Files\External\Service\GlobalStoragesService;
+use OCP\Files\External\Service\IGlobalStoragesService;
 use OCP\Files\StorageNotAvailableException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -37,11 +37,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Verify extends Base {
 	/**
-	 * @var GlobalStoragesService
+	 * @var IGlobalStoragesService
 	 */
 	protected $globalService;
 
-	function __construct(GlobalStoragesService $globalService) {
+	function __construct(IGlobalStoragesService $globalService) {
 		parent::__construct();
 		$this->globalService = $globalService;
 	}

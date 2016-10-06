@@ -27,9 +27,9 @@ use OC\User\NoUserException;
 use OC\Files\External\Lib\StorageConfig;
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\IStoragesBackendService;
-use OC\Files\External\Service\GlobalStoragesService;
+use OCP\Files\External\Service\IGlobalStoragesService;
 use OC\Files\External\Service\ImportLegacyStoragesService;
-use OC\Files\External\Service\UserStoragesService;
+use OCP\Files\External\Service\IUserStoragesService;
 use OCP\IUserManager;
 use OCP\IUserSession;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -40,12 +40,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Import extends Base {
 	/**
-	 * @var GlobalStoragesService
+	 * @var IGlobalStoragesService
 	 */
 	private $globalService;
 
 	/**
-	 * @var UserStoragesService
+	 * @var IUserStoragesService
 	 */
 	private $userService;
 
@@ -65,8 +65,8 @@ class Import extends Base {
 	/** @var IStoragesBackendService */
 	private $backendService;
 
-	function __construct(GlobalStoragesService $globalService,
-						 UserStoragesService $userService,
+	function __construct(IGlobalStoragesService $globalService,
+						 IUserStoragesService $userService,
 						 IUserSession $userSession,
 						 IUserManager $userManager,
 						 ImportLegacyStoragesService $importLegacyStorageService,

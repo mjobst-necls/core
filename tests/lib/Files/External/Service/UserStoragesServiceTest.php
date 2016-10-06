@@ -31,6 +31,7 @@ use OC\Files\External\Service\UserStoragesService;
 use OC\Files\External\StorageConfig;
 use Test\Traits\UserTrait;
 use OCP\Files\External\IStorageConfig;
+use OCP\Files\External\Service\IStoragesService;
 
 /**
  * @group DB
@@ -43,7 +44,7 @@ class UserStoragesServiceTest extends StoragesServiceTest {
 	private $userId;
 
 	/**
-	 * @var StoragesService
+	 * @var IStoragesService
 	 */
 	protected $globalStoragesService;
 

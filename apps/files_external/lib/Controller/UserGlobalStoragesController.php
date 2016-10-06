@@ -32,7 +32,7 @@ use OCP\IRequest;
 use OCP\IL10N;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http;
-use OC\Files\External\Service\UserGlobalStoragesService;
+use OCP\Files\External\Service\IUserGlobalStoragesService;
 use OCP\Files\External\NotFoundException;
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\Backend\Backend;
@@ -53,14 +53,14 @@ class UserGlobalStoragesController extends StoragesController {
 	 * @param string $AppName application name
 	 * @param IRequest $request request object
 	 * @param IL10N $l10n l10n service
-	 * @param UserGlobalStoragesService $userGlobalStoragesService storage service
+	 * @param IUserGlobalStoragesService $userGlobalStoragesService storage service
 	 * @param IUserSession $userSession
 	 */
 	public function __construct(
 		$AppName,
 		IRequest $request,
 		IL10N $l10n,
-		UserGlobalStoragesService $userGlobalStoragesService,
+		IUserGlobalStoragesService $userGlobalStoragesService,
 		IUserSession $userSession,
 		ILogger $logger
 	) {

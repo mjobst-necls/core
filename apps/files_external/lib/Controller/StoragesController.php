@@ -33,7 +33,7 @@ use OCP\IL10N;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
-use OC\Files\External\Service\StoragesService;
+use OCP\Files\External\Service\IStoragesService;
 use OCP\Files\External\NotFoundException;
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\Backend\Backend;
@@ -56,7 +56,7 @@ abstract class StoragesController extends Controller {
 	/**
 	 * Storages service
 	 *
-	 * @var StoragesService
+	 * @var IStoragesService
 	 */
 	protected $service;
 
@@ -71,14 +71,14 @@ abstract class StoragesController extends Controller {
 	 * @param string $AppName application name
 	 * @param IRequest $request request object
 	 * @param IL10N $l10n l10n service
-	 * @param StoragesService $storagesService storage service
+	 * @param IStoragesService $storagesService storage service
 	 * @param ILogger $logger
 	 */
 	public function __construct(
 		$AppName,
 		IRequest $request,
 		IL10N $l10n,
-		StoragesService $storagesService,
+		IStoragesService $storagesService,
 		ILogger $logger
 	) {
 		parent::__construct($AppName, $request);

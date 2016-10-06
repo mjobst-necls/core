@@ -34,12 +34,13 @@ use OCP\IUserSession;
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\NotFoundException;
 use OCP\Files\External\IStoragesBackendService;
+use OCP\Files\External\Service\IUserStoragesService;
 
 /**
  * Service class to manage user external storages
  * (aka personal storages)
  */
-class UserStoragesService extends StoragesService {
+class UserStoragesService extends StoragesService implements IUserStoragesService {
 	use UserTrait;
 
 	/**

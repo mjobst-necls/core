@@ -64,7 +64,7 @@ class LegacyUtil {
 	 * @param string $uid user
 	 * @return array of mount point string as key, mountpoint config as value
 	 *
-	 * @deprecated 8.2.0 use UserGlobalStoragesService::getStorages() and UserStoragesService::getStorages()
+	 * @deprecated 8.2.0 use IUserGlobalStoragesService::getStorages() and IUserStoragesService::getStorages()
 	 */
 	public static function getAbsoluteMountPoints($uid) {
 		$mountPoints = [];
@@ -106,7 +106,7 @@ class LegacyUtil {
 	 *
 	 * @return array
 	 *
-	 * @deprecated 8.2.0 use GlobalStoragesService::getStorages()
+	 * @deprecated 8.2.0 use IGlobalStoragesService::getStorages()
 	 */
 	public static function getSystemMountPoints() {
 		$mountPoints = [];
@@ -124,7 +124,7 @@ class LegacyUtil {
 	 *
 	 * @return array
 	 *
-	 * @deprecated 8.2.0 use UserStoragesService::getStorages()
+	 * @deprecated 8.2.0 use IUserStoragesService::getStorages()
 	 */
 	public static function getPersonalMountPoints() {
 		$mountPoints = [];

@@ -37,11 +37,12 @@ use OCP\Files\Config\IUserMountCache;
 use OCP\Files\StorageNotAvailableException;
 use OCP\Files\External\IStoragesBackendService;
 use OCP\Files\External\NotFoundException;
+use OCP\Files\External\Service\IStoragesService;
 
 /**
  * Service class to manage external storages
  */
-abstract class StoragesService {
+abstract class StoragesService implements IStoragesService {
 
 	/** @var IStoragesBackendService */
 	protected $backendService;

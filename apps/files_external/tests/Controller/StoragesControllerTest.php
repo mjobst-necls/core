@@ -25,7 +25,7 @@ namespace OCA\Files_External\Tests\Controller;
 use \OCP\AppFramework\Http;
 
 use OCA\Files_External\Controller\GlobalStoragesController;
-use OC\Files\External\Service\GlobalStoragesService;
+use OCP\Files\External\Service\IGlobalStoragesService;
 use OC\Files\External\StorageConfig;
 use OCP\Files\External\NotFoundException;
 
@@ -37,7 +37,7 @@ abstract class StoragesControllerTest extends \Test\TestCase {
 	protected $controller;
 
 	/**
-	 * @var GlobalStoragesService
+	 * @var IGlobalStoragesService
 	 */
 	protected $service;
 

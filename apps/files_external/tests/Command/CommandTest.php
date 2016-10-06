@@ -34,12 +34,10 @@ use Test\TestCase;
 abstract class CommandTest extends TestCase {
 	/**
 	 * @param IStorageConfig[] $mounts
-	 * @return \OC\Files\External\Service\GlobalStoragesService|\PHPUnit_Framework_MockObject_MockObject
+	 * @return \OCP\Files\External\Service\IGlobalStoragesService|\PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected function getGlobalStorageService(array $mounts = []) {
-		$mock = $this->getMockBuilder('OC\Files\External\Service\GlobalStoragesService')
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock('OCP\Files\External\Service\IGlobalStoragesService');
 
 		$this->bindMounts($mock, $mounts);
 

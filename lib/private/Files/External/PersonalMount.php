@@ -25,20 +25,20 @@ namespace OC\Files\External;
 
 use OC\Files\Mount\MountPoint;
 use OC\Files\Mount\MoveableMount;
-use OC\Files\External\Service\UserStoragesService;
+use OCP\Files\External\Service\IUserStoragesService;
 
 /**
  * Person mount points can be moved by the user
  */
 class PersonalMount extends MountPoint implements MoveableMount {
-	/** @var UserStoragesService */
+	/** @var IUserStoragesService */
 	protected $storagesService;
 
 	/** @var int */
 	protected $numericStorageId;
 
 	/**
-	 * @param UserStoragesService $storagesService
+	 * @param IUserStoragesService $storagesService
 	 * @param int $storageId
 	 * @param \OCP\Files\Storage $storage
 	 * @param string $mountpoint
@@ -47,7 +47,7 @@ class PersonalMount extends MountPoint implements MoveableMount {
 	 * @param array $mountOptions mount specific options
 	 */
 	public function __construct(
-		UserStoragesService $storagesService,
+		IUserStoragesService $storagesService,
 		$storageId,
 		$storage,
 		$mountpoint,

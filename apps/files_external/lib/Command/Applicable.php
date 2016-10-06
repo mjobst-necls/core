@@ -25,7 +25,7 @@ namespace OCA\Files_External\Command;
 use OC\Core\Command\Base;
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\NotFoundException;
-use OC\Files\External\Service\GlobalStoragesService;
+use OCP\Files\External\Service\IGlobalStoragesService;
 use OCP\IGroupManager;
 use OCP\IUserManager;
 use Symfony\Component\Console\Input\InputArgument;
@@ -35,7 +35,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Applicable extends Base {
 	/**
-	 * @var GlobalStoragesService
+	 * @var IGlobalStoragesService
 	 */
 	protected $globalService;
 
@@ -50,7 +50,7 @@ class Applicable extends Base {
 	private $groupManager;
 
 	function __construct(
-		GlobalStoragesService $globalService,
+		IGlobalStoragesService $globalService,
 		IUserManager $userManager,
 		IGroupManager $groupManager
 	) {

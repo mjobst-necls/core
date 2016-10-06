@@ -712,6 +712,7 @@ class Server extends ServerContainer implements IServerContainer {
 				$c->query('UserMountCache')
 			);
 		});
+		$this->registerAlias('OCP\Files\External\Service\IGlobalStoragesService', 'GlobalStoragesService');
 		$this->registerService('UserGlobalStoragesService', function (Server $c) {
 			return new UserGlobalStoragesService(
 				$c->query('StoragesBackendService'),
@@ -721,6 +722,7 @@ class Server extends ServerContainer implements IServerContainer {
 				$c->query('UserMountCache')
 			);
 		});
+		$this->registerAlias('OCP\Files\External\Service\IUserGlobalStoragesService', 'UserGlobalStoragesService');
 		$this->registerService('UserStoragesService', function (Server $c) {
 			return new UserStoragesService(
 				$c->query('StoragesBackendService'),
@@ -729,6 +731,7 @@ class Server extends ServerContainer implements IServerContainer {
 				$c->query('UserMountCache')
 			);
 		});
+		$this->registerAlias('OCP\Files\External\Service\IUserStoragesService', 'UserStoragesService');
 		$this->registerService('ShareManager', function(Server $c) {
 			$config = $c->getConfig();
 			$factoryClass = $config->getSystemValue('sharing.managerFactory', '\OC\Share20\ProviderFactory');
@@ -1390,8 +1393,6 @@ class Server extends ServerContainer implements IServerContainer {
 	}
 
 	/**
-	 * Not a public API as of 8.2, wait for 9.0
-	 *
 	 * @return \OCP\Files\External\IStoragesBackendService
 	 */
 	public function getStoragesBackendService() {
@@ -1399,27 +1400,21 @@ class Server extends ServerContainer implements IServerContainer {
 	}
 
 	/**
-	 * Not a public API as of 8.2, wait for 9.0
-	 *
-	 * @return \OC\Files\External\Service\GlobalStoragesService
+	 * @return \OCP\Files\External\Service\IGlobalStoragesService
 	 */
 	public function getGlobalStoragesService() {
 		return $this->query('GlobalStoragesService');
 	}
 
 	/**
-	 * Not a public API as of 8.2, wait for 9.0
-	 *
-	 * @return \OC\Files\External\Service\UserGlobalStoragesService
+	 * @return \OCP\Files\External\Service\IUserGlobalStoragesService
 	 */
 	public function getUserGlobalStoragesService() {
 		return $this->query('UserGlobalStoragesService');
 	}
 
 	/**
-	 * Not a public API as of 8.2, wait for 9.0
-	 *
-	 * @return \OCA\Files_External\Service\UserStoragesService
+	 * @return \OCP\Files\External\Service\IUserStoragesService
 	 */
 	public function getUserStoragesService() {
 		return $this->query('UserStoragesService');

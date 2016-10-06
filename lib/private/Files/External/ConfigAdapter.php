@@ -31,8 +31,8 @@ use OC\Files\Mount\MountPoint;
 use OCP\Files\Storage\IStorageFactory;
 use OCP\Files\Config\IMountProvider;
 use OCP\IUser;
-use OC\Files\External\Service\UserStoragesService;
-use OC\Files\External\Service\UserGlobalStoragesService;
+use OCP\Files\External\Service\IUserStoragesService;
+use OCP\Files\External\Service\IUserGlobalStoragesService;
 use OCP\Files\External\IStorageConfig;
 use OC\Files\Storage\FailedStorage;
 use OCP\Files\StorageNotAvailableException;
@@ -42,19 +42,19 @@ use OCP\Files\StorageNotAvailableException;
  */
 class ConfigAdapter implements IMountProvider {
 
-	/** @var UserStoragesService */
+	/** @var IUserStoragesService */
 	private $userStoragesService;
 
-	/** @var UserGlobalStoragesService */
+	/** @var IUserGlobalStoragesService */
 	private $userGlobalStoragesService;
 
 	/**
-	 * @param UserStoragesService $userStoragesService
-	 * @param UserGlobalStoragesService $userGlobalStoragesService
+	 * @param IUserStoragesService $userStoragesService
+	 * @param IUserGlobalStoragesService $userGlobalStoragesService
 	 */
 	public function __construct(
-		UserStoragesService $userStoragesService,
-		UserGlobalStoragesService $userGlobalStoragesService
+		IUserStoragesService $userStoragesService,
+		IUserGlobalStoragesService $userGlobalStoragesService
 	) {
 		$this->userStoragesService = $userStoragesService;
 		$this->userGlobalStoragesService = $userGlobalStoragesService;
