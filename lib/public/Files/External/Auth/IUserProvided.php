@@ -19,7 +19,7 @@
  *
  */
 
-namespace OCP\Files\External\Auth\IUserProvided;
+namespace OCP\Files\External\Auth;
 
 use OCP\IUser;
 
