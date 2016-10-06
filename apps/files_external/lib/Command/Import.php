@@ -28,7 +28,6 @@ use OC\Files\External\Lib\StorageConfig;
 use OCP\Files\External\IStorageConfig;
 use OCP\Files\External\IStoragesBackendService;
 use OCP\Files\External\Service\IGlobalStoragesService;
-use OC\Files\External\Service\ImportLegacyStoragesService;
 use OCP\Files\External\Service\IUserStoragesService;
 use OCP\IUserManager;
 use OCP\IUserSession;
@@ -59,9 +58,6 @@ class Import extends Base {
 	 */
 	private $userManager;
 
-	/** @var ImportLegacyStoragesService */
-	private $importLegacyStorageService;
-
 	/** @var IStoragesBackendService */
 	private $backendService;
 
@@ -69,7 +65,6 @@ class Import extends Base {
 						 IUserStoragesService $userService,
 						 IUserSession $userSession,
 						 IUserManager $userManager,
-						 ImportLegacyStoragesService $importLegacyStorageService,
 						 IStoragesBackendService $backendService
 	) {
 		parent::__construct();
@@ -77,7 +72,6 @@ class Import extends Base {
 		$this->userService = $userService;
 		$this->userSession = $userSession;
 		$this->userManager = $userManager;
-		$this->importLegacyStorageService = $importLegacyStorageService;
 		$this->backendService = $backendService;
 	}
 
@@ -129,14 +123,8 @@ class Import extends Base {
 
 		$isLegacy = isset($data['user']) || isset($data['group']);
 		if ($isLegacy) {
-			$this->importLegacyStorageService->setData($data);
-			$mounts = $this->importLegacyStorageService->getAllStorages();
-			foreach ($mounts as $mount) {
-				if ($mount->getBackendOption('password') === false) {
-					$output->writeln('<error>Failed to decrypt password</error>');
-					return 1;
-				}
-			}
+			$output->writeln('<error>Importing legacy mount.json format not supported any more</error>');
+			return 1;
 		} else {
 			if (!isset($data[0])) { //normalize to an array of mounts
 				$data = [$data];
