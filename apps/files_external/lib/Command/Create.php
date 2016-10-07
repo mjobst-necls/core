@@ -158,7 +158,7 @@ class Create extends Base {
 			$config[$key] = $value;
 		}
 
-		$mount = $this->getStorageService($user)->createStorageConfig();
+		$mount = $this->getStorageService($user)->createConfig();
 		$mount->setMountPoint($mountPoint);
 		$mount->setBackend($storageBackend);
 		$mount->setAuthMechanism($authBackend);
