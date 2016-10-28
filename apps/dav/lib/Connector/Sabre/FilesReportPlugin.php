@@ -23,6 +23,7 @@
 namespace OCA\DAV\Connector\Sabre;
 
 use OC\Files\View;
+use OCA\DAV\Files\Xml\FilterRequest;
 use Sabre\DAV\Exception\NotFound;
 use Sabre\DAV\Exception\PreconditionFailed;
 use Sabre\DAV\Exception\ReportNotSupported;
@@ -140,6 +141,8 @@ class FilesReportPlugin extends ServerPlugin {
 
 		$server->xml->namespaceMap[self::NS_OWNCLOUD] = 'oc';
 
+		$server->xml->elementMap[self::REPORT_NAME] = FilterRequest::class;
+
 		$this->server = $server;
 		$this->server->on('report', [$this, 'onReport']);
 	}
@@ -160,49 +163,42 @@ class FilesReportPlugin extends ServerPlugin {
 	 * REPORT operations to look for files
 	 *
 	 * @param string $reportName
-	 * @param [] $report
+	 * @param mixed $report
 	 * @param string $uri
 	 * @return bool
 	 * @throws NotFound
 	 * @throws ReportNotSupported
 	 */
 	public function onReport($reportName, $report, $uri) {
+
 		$reportTargetNode = $this->server->tree->getNodeForPath($uri);
 		if (!$reportTargetNode instanceof Directory || $reportName !== self::REPORT_NAME) {
 			return;
 		}
 
-		$ns = '{' . $this::NS_OWNCLOUD . '}';
-		$requestedProps = [];
-		$filterRules = [];
+		$requestedProps = $report->properties;
+		$filterRules = $report->filters;
 
-		// parse report properties and gather filter info
-		foreach ($report as $reportProps) {
-			$name = $reportProps['name'];
-			if ($name === $ns . 'filter-rules') {
-				$filterRules = $reportProps['value'];
-			} else if ($name === '{DAV:}prop') {
-				// propfind properties
-				foreach ($reportProps['value'] as $propVal) {
-					$requestedProps[] = $propVal['name'];
-				}
+		if (empty($filterRules['systemtag']) && is_null($filterRules['favorite'])) {
+			// load all
+			$results = $reportTargetNode->getChildren();
+		} else {
+			// gather all file ids matching filter
+			try {
+				$resultFileIds = $this->processFilterRules($filterRules);
+			} catch (TagNotFoundException $e) {
+				throw new PreconditionFailed('Cannot filter by non-existing tag', 0, $e);
 			}
+
+			// find sabre nodes by file id, restricted to the root node path
+			$results = $this->findNodesByFileIds($reportTargetNode, $resultFileIds);
 		}
 
-		if (empty($filterRules)) {
-			// an empty filter would return all existing files which would be slow
-			throw new BadRequest('Missing filter-rule block in request');
+		if (!is_null($report->limit)) {
+			$length = $report->limit['size'];
+			$offset = $report->limit['page'] * $length;
+			$results = array_slice($results, $offset, $length);
 		}
-
-		// gather all file ids matching filter
-		try {
-			$resultFileIds = $this->processFilterRules($filterRules);
-		} catch (TagNotFoundException $e) {
-			throw new PreconditionFailed('Cannot filter by non-existing tag', 0, $e);
-		}
-
-		// find sabre nodes by file id, restricted to the root node path
-		$results = $this->findNodesByFileIds($reportTargetNode, $resultFileIds);
 
 		$filesUri = $this->getFilesBaseUri($uri, $reportTargetNode->getPath());
 		$responses = $this->prepareResponses($filesUri, $requestedProps, $results);
@@ -253,18 +249,9 @@ class FilesReportPlugin extends ServerPlugin {
 	 * @throws TagNotFoundException whenever a tag was not found
 	 */
 	protected function processFilterRules($filterRules) {
-		$ns = '{' . $this::NS_OWNCLOUD . '}';
 		$resultFileIds = null;
-		$systemTagIds = [];
-		$favoriteFilter = null;
-		foreach ($filterRules as $filterRule) {
-			if ($filterRule['name'] === $ns . 'systemtag') {
-				$systemTagIds[] = $filterRule['value'];
-			}
-			if ($filterRule['name'] === $ns . 'favorite') {
-				$favoriteFilter = true;
-			}
-		}
+		$systemTagIds = $filterRules['systemtag'];
+		$favoriteFilter = $filterRules['favorite'];
 
 		if ($favoriteFilter !== null) {
 			$resultFileIds = $this->fileTagger->load('files')->getFavorites();
